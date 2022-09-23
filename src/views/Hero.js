@@ -22,7 +22,7 @@ export class Hero {
 
     collectDiamond() {
         ++this.score;
-        this.sprite.emit(HeroViewEvent.SCORE);
+        window.dispatchEvent(new Event(HeroViewEvent.DIAMOND_COLLECT));
     }
 
     startJump() {

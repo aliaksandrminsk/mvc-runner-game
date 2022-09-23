@@ -40,7 +40,7 @@ export class GameView extends PIXI.utils.EventEmitter {
 
       this.scene = new MainScene(this.game);
     } else if (this.game.scene === "final") {
-      this.scene = new FinalScene();
+      this.scene = new FinalScene(this.game);
     }
     this.container.addChild(this.scene.container);
   }

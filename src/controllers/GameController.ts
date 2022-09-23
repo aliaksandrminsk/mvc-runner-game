@@ -1,6 +1,7 @@
 import { Game } from "../models/Game";
 import { GameView } from "../views/GameView";
 import {GameViewEvent} from "../events/GameViewEvent";
+import {HeroViewEvent} from "../events/HeroViewEvent";
 
 export class GameController {
   private readonly _gameModel: Game;
@@ -13,6 +14,7 @@ export class GameController {
     //** Add listeners to the GameController.
     window.addEventListener(GameViewEvent.HERO_DIE, () => this.loseGame());
     window.addEventListener(GameViewEvent.FINAL_SCENE_CLICKED, () => this.startGame());
+    window.addEventListener(HeroViewEvent.DIAMOND_COLLECT, () => this.collectDiamond());
   }
 
   private get gameModel(): Game {
@@ -21,6 +23,7 @@ export class GameController {
 
   //** Set state when user play a game.
   protected startGame() {
+    this.gameModel.score = 0;
     this.gameModel.scene = "main";
   }
 
@@ -28,4 +31,10 @@ export class GameController {
   protected loseGame() {
     this.gameModel.scene = "final";
   }
+
+  //** Collect diamond.
+  protected collectDiamond() {
+    this.gameModel.score++;
+  }
+
 }

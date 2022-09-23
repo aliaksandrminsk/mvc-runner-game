@@ -5,12 +5,12 @@ import {GameViewEvent} from "../events/GameViewEvent";
 import {constants} from "../constants";
 
 export class FinalScene extends PIXI.utils.EventEmitter {
-    constructor(amount) {
+    constructor(game) {
         super();
         this.container = new PIXI.Container();
         this.createBackground();
         this.createPopup();
-        this.createLabelScore(amount);
+        this.createLabelScore(game.score);
         this.createText();
         this.container.interactive = true;
         this.container.once("pointerdown", () => {

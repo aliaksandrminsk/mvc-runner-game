@@ -6,6 +6,7 @@ import { LabelScore } from "./LabelScore";
 import {GameViewEvent} from "../events/GameViewEvent";
 import {HeroViewEvent} from "../events/HeroViewEvent";
 import {Sound} from "@pixi/sound";
+import {GameModelEvent} from "../events/GameModelEvent";
 
 export class MainScene extends PIXI.utils.EventEmitter {
 
@@ -33,8 +34,8 @@ export class MainScene extends PIXI.utils.EventEmitter {
     createUI() {
         this.labelScore = new LabelScore();
         this.container.addChild(this.labelScore);
-        this.hero.sprite.on(HeroViewEvent.SCORE, () => {
-            this.labelScore.renderScore(this.hero.score);
+        this.game.on(GameModelEvent.CHANGE_SCORE, () => {
+            this.labelScore.renderScore(this.game.score);
         });
     }
 
