@@ -2,7 +2,7 @@ import { Game } from "../models/Game";
 import * as PIXI from "pixi.js";
 //import { Container } from "pixi.js";
 //import * as utils from "@pixi/utils";
-import { GameEvent } from "../events/GameEvent";
+import { GameModelEvent } from "../events/GameModelEvent";
 import {FinalScene} from "./FinalScene";
 import {MainScene} from "./MainScene";
 
@@ -41,7 +41,7 @@ export class GameView extends PIXI.utils.EventEmitter {
     this.init();
 
     //** Listener.
-    this.game.on(GameEvent.CHANGE_GAME_SCENE, () => this.setGameState());
+    this.game.on(GameModelEvent.CHANGE_GAME_SCENE, () => this.setGameState());
   }
 
   get game(): Game {
