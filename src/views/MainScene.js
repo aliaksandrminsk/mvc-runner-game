@@ -1,26 +1,26 @@
 import * as PIXI from "pixi.js";
-//import { Globals } from "../scripts/Globals";
 import { Background } from "./Background";
 import { Platforms } from "./Platforms";
 import { Hero } from "./Hero";
 import { LabelScore } from "./LabelScore";
 import {GameViewEvent} from "../events/GameViewEvent";
+import {HeroViewEvent} from "../events/HeroViewEvent";
+import {Sound} from "@pixi/sound";
 
 export class MainScene extends PIXI.utils.EventEmitter {
 
     constructor(game) {
         super();
         this.container = new PIXI.Container();
-        // Globals.resources.music.sound.play({
-        //     loop: true,
-        //     volume: 0.2
-        // });
         this.game = game;
 
         this.createBackground();
         this.createPlatforms();
         this.createHero();
         this.createUI();
+
+        const sound = Sound.from(PIXI.Loader.shared.resources.music);
+        sound.play();
 
         const ticker = PIXI.Ticker.shared;
         ticker.add((dt) => {
@@ -31,7 +31,7 @@ export class MainScene extends PIXI.utils.EventEmitter {
     createUI() {
         this.labelScore = new LabelScore();
         this.container.addChild(this.labelScore);
-        this.hero.sprite.on("score", () => {
+        this.hero.sprite.on(HeroViewEvent.SCORE, () => {
             this.labelScore.renderScore(this.hero.score);
         });
     }
@@ -42,20 +42,19 @@ export class MainScene extends PIXI.utils.EventEmitter {
     }
 
     createPlatforms() {
-        this.platfroms = new Platforms(this.game);
+        this.platfroms = new Platforms();
         this.container.addChild(this.platfroms.container);
     }
 
     createHero() {
-        this.hero = new Hero(this.game);
+        this.hero = new Hero();
         this.container.addChild(this.hero.sprite);
         this.container.interactive = true;
         this.container.on("pointerdown", () => {
             this.hero.startJump();
         });
-        this.hero.sprite.once("die", () => {
+        this.hero.sprite.once(HeroViewEvent.HERO_DIE, () => {
             window.dispatchEvent(new Event(GameViewEvent.HERO_DIE));
-           // this.emit(GameViewEvent.HERO_DIE);
         });
     }
 

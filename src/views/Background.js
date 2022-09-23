@@ -9,7 +9,6 @@ export class Background {
 
     createSprites() {
         this.sprites = [];
-
         for (let i = 0; i < 3; i++) {
             this.createSprite(i);
         }
@@ -25,9 +24,7 @@ export class Background {
 
     move(sprite, offset) {
         const spriteRightX = sprite.x + sprite.width;
-
         const screenLeftX  = 0;
-
         if (spriteRightX <= screenLeftX) {
             sprite.x += sprite.width * this.sprites.length;
         }
@@ -36,9 +33,7 @@ export class Background {
 
     update(dt) {
         const offset = this.speed * dt;
-
         this.sprites.forEach(sprite => {
-
             this.move(sprite, offset);
         });
     }
