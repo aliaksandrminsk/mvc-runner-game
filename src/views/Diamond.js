@@ -1,9 +1,8 @@
 import * as PIXI from "pixi.js";
-import { Globals } from "./Globals";
 
 export class Diamond {
     constructor(x, y) {
-        this.sprite = new PIXI.Sprite(Globals.resources["diamond"].texture);
+        this.sprite = new PIXI.Sprite(PIXI.Texture.from("diamond"));
         this.sprite.x = x;
         this.sprite.y = y;
     }

@@ -1,10 +1,9 @@
-import * as PIXI from "pixi.js";
-import { Globals } from "./Globals";
+import { Container, Sprite, Texture } from 'pixi.js';
 
 export class Background {
     constructor() {
         this.speed = 2;
-        this.container = new PIXI.Container();
+        this.container = new Container();
         this.createSprites();
     }
 
@@ -17,7 +16,7 @@ export class Background {
     }
 
     createSprite(i) {
-        const sprite = new PIXI.Sprite(Globals.resources["background"].texture);
+        const sprite = new Sprite(Texture.from("background"));
         sprite.x = sprite.width * i;
         sprite.y = 0;
         this.container.addChild(sprite);
@@ -32,7 +31,6 @@ export class Background {
         if (spriteRightX <= screenLeftX) {
             sprite.x += sprite.width * this.sprites.length;
         }
-        
         sprite.x -= offset;
     }
 
@@ -40,6 +38,7 @@ export class Background {
         const offset = this.speed * dt;
 
         this.sprites.forEach(sprite => {
+
             this.move(sprite, offset);
         });
     }

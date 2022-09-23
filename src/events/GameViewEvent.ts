@@ -1,0 +1,6 @@
+//** View event.
+export const GameViewEvent = {
+  FINAL_SCENE_CLICKED: "FINAL_SCENE_CLICKED",
+  MAIN_SCENE_CLICKED: "MAIN_SCENE_CLICKED",
+  HERO_DIE: "HERO_DIE",
+};

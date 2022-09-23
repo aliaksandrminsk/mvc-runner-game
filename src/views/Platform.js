@@ -1,6 +1,8 @@
 import * as PIXI from "pixi.js";
-import { Globals } from "./Globals";
+//import { Globals } from "../scripts/Globals";
 import { Diamond } from "./Diamond";
+import {Texture} from "pixi.js";
+import {constants} from "../constants";
 
 const TileSize = 64;
 
@@ -88,7 +90,8 @@ export class Platform {
     createContainer(x) {
         this.container = new PIXI.Container();
         this.container.x = x;
-        this.container.y = window.innerHeight - this.rows * TileSize;
+        //this.container.y = window.innerHeight - this.rows * TileSize;
+        this.container.y =  constants.GAME_AREA_SIZE_S - this.rows * TileSize;
     }
 
     createTiles() {
@@ -101,7 +104,8 @@ export class Platform {
 
     createTile(row, col) {
         const texture = row === 0 ? "platform" : "tile" 
-        const tile = new PIXI.Sprite(Globals.resources[texture].texture);
+        const tile = new PIXI.Sprite(Texture.from(texture));
+
         this.container.addChild(tile);
         tile.x = col * tile.width;
         tile.y = row * tile.height;
@@ -110,7 +114,6 @@ export class Platform {
 
     move() {
         this.container.x += this.dx;
-
         if (this.right < 0) {
             this.container.emit("hidden");
         }

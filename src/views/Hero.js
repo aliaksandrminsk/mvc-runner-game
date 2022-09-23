@@ -1,16 +1,20 @@
 import * as PIXI from "pixi.js";
-import { Globals } from "./Globals";
+import {Texture} from "@pixi/core";
+import {constants} from "../constants";
+import {GameViewEvent} from "../events/GameViewEvent";
+//import { Globals } from "../scripts/Globals";
 
 export class Hero {
-    constructor() {
+    constructor(game) {
         this.score = 0;
         this.dy = 0;
         this.jumpIndex = 0;
         this.platform = null;
+        this._game = game;
 
         this.sprite = new PIXI.AnimatedSprite([
-            Globals.resources["walk1"].texture,
-            Globals.resources["walk2"].texture
+            Texture.from("walk1"),
+            Texture.from("walk2")
         ]);
         this.sprite.x = 100;
         this.sprite.y = 100;
@@ -63,13 +67,15 @@ export class Hero {
         this.sprite.x = platform.nextleft - this.sprite.width;
     }
 
-    update() {
+    update(dt) {
         if (!this.platform) {
             ++this.dy;
             this.sprite.y += this.dy;
         }
 
-        if (this.sprite.y > window.innerHeight) {
+        //if (this.sprite.y > window.innerHeight) {
+        if (this.sprite.y > constants.GAME_AREA_SIZE_S) {
+           // window.dispatchEvent(new Event(GameViewEvent.HERO_DIE));
             this.sprite.emit("die");
         }
     }
