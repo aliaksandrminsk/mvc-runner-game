@@ -5,7 +5,7 @@ import { Hero } from "./Hero";
 import { LabelScore } from "./LabelScore";
 import {GameViewEvent} from "../events/GameViewEvent";
 import {HeroViewEvent} from "../events/HeroViewEvent";
-//import {Sound} from "@pixi/sound";
+import {Sound} from "@pixi/sound";
 
 export class MainScene extends PIXI.utils.EventEmitter {
 
@@ -19,8 +19,8 @@ export class MainScene extends PIXI.utils.EventEmitter {
         this.createHero();
         this.createUI();
 
-        //const sound = Sound.from(PIXI.Loader.shared.resources.music);
-        //sound.play();
+        const sound = Sound.from(PIXI.Loader.shared.resources.music);
+        sound.play();
 
         const ticker = PIXI.Ticker.shared;
         ticker.add((dt) => {
