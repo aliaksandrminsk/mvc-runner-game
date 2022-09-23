@@ -20,7 +20,11 @@ export class MainScene extends PIXI.utils.EventEmitter {
         this.createUI();
 
         const sound = Sound.from(PIXI.Loader.shared.resources.music);
-        sound.play();
+        sound.play( {
+            loop: true,
+        });
+
+
 
         const ticker = PIXI.Ticker.shared;
         ticker.add((dt) => {
