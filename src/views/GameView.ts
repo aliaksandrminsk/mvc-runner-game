@@ -33,7 +33,7 @@ export class GameView extends PIXI.utils.EventEmitter {
   setGameState() {
      if (this.scene) {
        this.container.removeChild(this.scene.container)
-       this.scene.container.destroy();
+       this.scene.destroy();
        this.scene = null;
      }
     if (this.game.scene === "main") {

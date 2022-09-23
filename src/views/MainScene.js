@@ -19,12 +19,10 @@ export class MainScene extends PIXI.utils.EventEmitter {
         this.createHero();
         this.createUI();
 
-        const sound = Sound.from(PIXI.Loader.shared.resources.music);
-        sound.play( {
+        this.sound = Sound.from(PIXI.Loader.shared.resources.music);
+        this.sound.play( {
             loop: true,
         });
-
-
 
         const ticker = PIXI.Ticker.shared;
         ticker.add((dt) => {
@@ -67,5 +65,10 @@ export class MainScene extends PIXI.utils.EventEmitter {
         this.platfroms.checkCollision(this.hero);
         this.platfroms.update(dt);
         this.hero.update(dt);
+    }
+
+    destroy() {
+        this.container.destroy();
+        this.sound.stop();
     }
 }

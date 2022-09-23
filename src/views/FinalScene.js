@@ -54,4 +54,9 @@ export class FinalScene extends PIXI.utils.EventEmitter {
         text.text = "Tap to restart";
         this.popup.addChild(text);
     }
+
+    destroy() {
+        this.container.destroy();
+
+    }
 }
