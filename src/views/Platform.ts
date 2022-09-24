@@ -3,11 +3,22 @@ import * as PIXI from "pixi.js";
 import { Diamond } from "./Diamond";
 import {Texture} from "pixi.js";
 import {constants} from "../constants";
+import {Hero} from "./Hero";
 
 const TileSize = 64;
 
 export class Platform {
-    constructor(rows, cols, x) {
+    private diamonds: Array<Diamond>;
+    private readonly diamondsOffsetMin: number;
+    private readonly diamondsOffsetMax: number;
+    private readonly rows: number;
+    private readonly cols: number;
+    private readonly width: number;
+    private readonly height: number;
+    private readonly dx: number;
+    public container: PIXI.Container;
+
+    constructor(rows: number, cols: number, x: number) {
         this.diamonds = [];
         this.diamondsOffsetMin = 100;
         this.diamondsOffsetMax = 200;
@@ -37,7 +48,7 @@ export class Platform {
         }
     }
 
-    checkCollision(hero) {
+    checkCollision(hero: Hero) {
         this.diamonds.forEach(diamond => diamond.checkCollision(hero));
 
         if (this.isCollideTop(hero)) {
@@ -53,14 +64,14 @@ export class Platform {
         }
     }
 
-    isCollideTop(hero) {
+    isCollideTop(hero: Hero) {
         return hero.right >= this.left &&
             hero.left <= this.right &&
             hero.bottom <= this.top &&
             hero.nextbottom >= this.top;
     }
 
-    isCollideLeft(hero) {
+    isCollideLeft(hero: Hero) {
         return hero.bottom >= this.top &&
             hero.top <= this.bottom &&
             hero.right <= this.left && 
@@ -87,10 +98,9 @@ export class Platform {
         return this.top + this.height;
     }
 
-    createContainer(x) {
+    createContainer(x: number) {
         this.container = new PIXI.Container();
         this.container.x = x;
-        //this.container.y = window.innerHeight - this.rows * TileSize;
         this.container.y =  constants.GAME_AREA_SIZE_S - this.rows * TileSize;
     }
 
@@ -102,7 +112,7 @@ export class Platform {
         }
     }
 
-    createTile(row, col) {
+    createTile(row: number, col: number) {
         const texture = row === 0 ? "platform" : "tile" 
         const tile = new PIXI.Sprite(Texture.from(texture));
 

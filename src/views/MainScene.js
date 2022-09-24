@@ -1,6 +1,6 @@
 import * as PIXI from "pixi.js";
 import { Background } from "./Background";
-import { Platforms } from "./Platforms";
+import { Platforms } from "./Platforms.ts";
 import { Hero } from "./Hero";
 import { LabelScore } from "./LabelScore";
 import {GameViewEvent} from "../events/GameViewEvent";
