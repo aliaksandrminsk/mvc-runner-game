@@ -30,7 +30,10 @@ export class Platform {
     this.width = cols * TileSize;
     this.height = rows * TileSize;
 
-    this.createContainer(x);
+    this.container = new PIXI.Container();
+    this.container.x = x;
+    this.container.y = constants.GAME_AREA_HEIGHT - this.rows * TileSize;
+
     this.createTiles();
     this.createDiamonds();
   }
@@ -43,7 +46,7 @@ export class Platform {
     for (let i = 0; i < this.cols; i++) {
       if (Math.random() < 0.4) {
         const diamond = new Diamond(64 * i, -y);
-        this.container.addChild(diamond.sprite);
+        if (diamond.sprite) this.container.addChild(diamond.sprite);
         this.diamonds.push(diamond);
       }
     }
@@ -101,12 +104,6 @@ export class Platform {
 
   get bottom() {
     return this.top + this.height;
-  }
-
-  createContainer(x: number) {
-    this.container = new PIXI.Container();
-    this.container.x = x;
-    this.container.y = constants.GAME_AREA_HEIGHT - this.rows * TileSize;
   }
 
   createTiles() {

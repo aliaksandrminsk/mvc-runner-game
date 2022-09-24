@@ -1,15 +1,24 @@
 import * as PIXI from "pixi.js";
 import { Background } from "./Background";
-import { Platforms } from "./Platforms.ts";
+import { Platforms } from "./Platforms";
 import { Hero } from "./Hero";
 import { LabelScore } from "./LabelScore";
 import { GameViewEvent } from "../events/GameViewEvent";
 import { HeroViewEvent } from "../events/HeroViewEvent";
 import { Sound } from "@pixi/sound";
 import { GameModelEvent } from "../events/GameModelEvent";
+import { Game } from "../models/Game";
 
 export class MainScene extends PIXI.utils.EventEmitter {
-  constructor(game) {
+  protected game: Game;
+  public container: PIXI.Container;
+  protected sound: Sound;
+
+  protected hero: Hero | null = null;
+  protected bg: Background | null = null;
+  protected platforms: Platforms | null = null;
+
+  constructor(game: Game) {
     super();
     this.container = new PIXI.Container();
     this.game = game;
@@ -31,10 +40,10 @@ export class MainScene extends PIXI.utils.EventEmitter {
   }
 
   createUI() {
-    this.labelScore = new LabelScore();
-    this.container.addChild(this.labelScore);
+    const labelScore = new LabelScore();
+    this.container.addChild(labelScore);
     this.game.on(GameModelEvent.CHANGE_SCORE, () => {
-      this.labelScore.renderScore(this.game.score);
+      labelScore.renderScore(this.game.score);
     });
   }
 
@@ -44,8 +53,8 @@ export class MainScene extends PIXI.utils.EventEmitter {
   }
 
   createPlatforms() {
-    this.platfroms = new Platforms();
-    this.container.addChild(this.platfroms.container);
+    this.platforms = new Platforms();
+    this.container.addChild(this.platforms.container);
   }
 
   createHero() {
@@ -53,18 +62,20 @@ export class MainScene extends PIXI.utils.EventEmitter {
     this.container.addChild(this.hero.sprite);
     this.container.interactive = true;
     this.container.on("pointerdown", () => {
-      this.hero.startJump();
+      if (this.hero) this.hero.startJump();
     });
     this.hero.sprite.once(HeroViewEvent.HERO_DIE, () => {
       window.dispatchEvent(new Event(GameViewEvent.HERO_DIE));
     });
   }
 
-  update(dt) {
-    this.bg.update(dt);
-    this.platfroms.checkCollision(this.hero);
-    this.platfroms.update(dt);
-    this.hero.update(dt);
+  update(dt: number) {
+    if (this.bg) this.bg.update(dt);
+    if (this.platforms) {
+      this.platforms.checkCollision(this.hero);
+      this.platforms.update();
+    }
+    if (this.hero) this.hero.update();
   }
 
   destroy() {

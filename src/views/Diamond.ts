@@ -32,18 +32,34 @@ export class Diamond {
   }
 
   get left() {
-    return this.sprite.x + this.sprite.parent.x;
+    if (this.sprite) {
+      return this.sprite.x + this.sprite.parent.x;
+    } else {
+      return 0;
+    }
   }
 
   get right() {
-    return this.left + this.sprite.width;
+    if (this.sprite) {
+      return this.left + this.sprite.width;
+    } else {
+      return 0;
+    }
   }
 
   get top() {
-    return this.sprite.y + this.sprite.parent.y;
+    if (this.sprite) {
+      return this.sprite.y + this.sprite.parent.y;
+    } else {
+      return 0;
+    }
   }
 
   get bottom() {
-    return this.top + this.sprite.height;
+    if (this.sprite) {
+      return this.top + this.sprite.height;
+    } else {
+      return 0;
+    }
   }
 }

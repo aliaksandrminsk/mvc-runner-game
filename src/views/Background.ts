@@ -3,7 +3,7 @@ import { Container, Sprite, Texture } from "pixi.js";
 export class Background {
   public container: Container;
   private readonly speed: number;
-  private sprites: Array<Sprite>;
+  private sprites: Array<Sprite> = [];
 
   constructor() {
     this.speed = 2;

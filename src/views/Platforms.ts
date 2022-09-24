@@ -1,11 +1,13 @@
 import * as PIXI from "pixi.js";
 import { Platform } from "./Platform";
 import { constants } from "../constants";
+import { Hero } from "./Hero";
 
 export class Platforms {
   public container: PIXI.Container;
   private platforms: Array<Platform>;
   private ranges: any;
+  private current: Platform | null = null;
 
   constructor() {
     this.platforms = [];
@@ -41,7 +43,10 @@ export class Platforms {
         Math.random() * (this.ranges.offset.max - this.ranges.offset.min)
       );
 
-    data.x = this.current.right + offset;
+    if (this.current) {
+      data.x = this.current.right + offset;
+    }
+
     data.cols =
       this.ranges.cols.min +
       Math.round(Math.random() * (this.ranges.cols.max - this.ranges.cols.min));
@@ -64,14 +69,14 @@ export class Platforms {
     });
   }
 
-  checkCollision(hero) {
+  checkCollision(hero: Hero) {
     this.platforms.forEach((platform) => {
       platform.checkCollision(hero);
     });
   }
 
   update() {
-    if (this.current.right < constants.GAME_AREA_WIDTH) {
+    if (this.current && this.current.right < constants.GAME_AREA_WIDTH) {
       this.createPlatform(this.randomData);
     }
 

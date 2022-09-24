@@ -8,7 +8,7 @@ export class Hero {
   private dy: number;
   private jumpIndex: number;
   public platform: Platform | null;
-  private sprite: PIXI.AnimatedSprite;
+  public sprite: PIXI.AnimatedSprite;
 
   constructor() {
     this.score = 0;

@@ -1,11 +1,15 @@
 import * as PIXI from "pixi.js";
-import { Background } from "./Background.ts";
-import { LabelScore } from "./LabelScore.ts";
+import { Background } from "./Background";
+import { LabelScore } from "./LabelScore";
 import { GameViewEvent } from "../events/GameViewEvent";
 import { constants } from "../constants";
+import { Game } from "../models/Game";
 
 export class FinalScene extends PIXI.utils.EventEmitter {
-  constructor(game) {
+  public container: PIXI.Container;
+  protected popup: PIXI.Graphics | null = null;
+
+  constructor(game: Game) {
     super();
     this.container = new PIXI.Container();
     this.createBackground();
@@ -19,8 +23,8 @@ export class FinalScene extends PIXI.utils.EventEmitter {
   }
 
   createBackground() {
-    this.bg = new Background();
-    this.container.addChild(this.bg.container);
+    const bg = new Background();
+    this.container.addChild(bg.container);
   }
 
   createPopup() {
@@ -34,14 +38,14 @@ export class FinalScene extends PIXI.utils.EventEmitter {
     this.container.addChild(this.popup);
   }
 
-  createLabelScore(amount) {
-    this.labelScore = new LabelScore(
+  createLabelScore(amount: number) {
+    const labelScore = new LabelScore(
       constants.GAME_AREA_WIDTH / 2,
       constants.GAME_AREA_HEIGHT / 2 - 100,
       0.5
     );
-    this.labelScore.renderScore(amount);
-    this.container.addChild(this.labelScore);
+    labelScore.renderScore(amount);
+    this.container.addChild(labelScore);
   }
 
   createText() {
@@ -56,7 +60,9 @@ export class FinalScene extends PIXI.utils.EventEmitter {
       fill: ["#FFFFFF"],
     };
     text.text = "Tap to restart";
-    this.popup.addChild(text);
+    if (this.popup) {
+      this.popup.addChild(text);
+    }
   }
 
   destroy() {
