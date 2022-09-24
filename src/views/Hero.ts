@@ -16,10 +16,9 @@ export class Hero {
     this.jumpIndex = 0;
     this.platform = null;
 
-    this.sprite = new PIXI.AnimatedSprite([
-      PIXI.Texture.from("walk1"),
-      PIXI.Texture.from("walk2"),
-    ]);
+    this.sprite = new PIXI.AnimatedSprite([PIXI.Texture.from("jump")]);
+    this.setAppearance(true);
+
     this.sprite.x = 100;
     this.sprite.y = 100;
     this.sprite.loop = true;
@@ -37,6 +36,7 @@ export class Hero {
       ++this.jumpIndex;
       this.platform = null;
       this.dy = -18;
+      this.setAppearance(true);
     }
   }
 
@@ -61,6 +61,10 @@ export class Hero {
   }
 
   stayOnPlatform(platform: Platform) {
+    if (!this.platform) {
+      this.setAppearance(false);
+    }
+
     this.platform = platform;
     this.dy = 0;
     this.jumpIndex = 0;
@@ -69,6 +73,21 @@ export class Hero {
 
   moveByPlatform(platform: Platform) {
     this.sprite.x = platform.nextleft - this.sprite.width;
+  }
+
+  setAppearance(isJump: boolean) {
+    if (isJump) {
+      this.sprite.textures = [PIXI.Texture.from("jump")];
+      this.sprite.stop();
+    } else {
+      this.sprite.textures = [
+        PIXI.Texture.from("walk1"),
+        PIXI.Texture.from("walk2"),
+        PIXI.Texture.from("walk3"),
+        PIXI.Texture.from("walk4"),
+      ];
+      this.sprite.play();
+    }
   }
 
   update() {
