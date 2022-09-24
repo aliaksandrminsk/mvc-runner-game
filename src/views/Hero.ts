@@ -77,7 +77,7 @@ export class Hero {
       this.sprite.y += this.dy;
     }
 
-    if (this.sprite.y > constants.GAME_AREA_SIZE_S) {
+    if (this.sprite.y > constants.GAME_AREA_HEIGHT) {
       this.sprite.emit(HeroViewEvent.HERO_DIE);
     }
   }

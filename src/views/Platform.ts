@@ -106,7 +106,7 @@ export class Platform {
   createContainer(x: number) {
     this.container = new PIXI.Container();
     this.container.x = x;
-    this.container.y = constants.GAME_AREA_SIZE_S - this.rows * TileSize;
+    this.container.y = constants.GAME_AREA_HEIGHT - this.rows * TileSize;
   }
 
   createTiles() {

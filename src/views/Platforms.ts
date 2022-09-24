@@ -71,7 +71,7 @@ export class Platforms {
   }
 
   update() {
-    if (this.current.right < constants.GAME_AREA_SIZE_L) {
+    if (this.current.right < constants.GAME_AREA_WIDTH) {
       this.createPlatform(this.randomData);
     }
 

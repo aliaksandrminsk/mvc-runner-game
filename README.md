@@ -1,6 +1,6 @@
 # Runner game
 
-This project is a puzzle game. Technologies: [PixiJS](https://pixijs.com/), [TypeScript](https://www.typescriptlang.org/) and [Webpack](https://webpack.js.org/)
+This project is a runner game. Technologies: [PixiJS](https://pixijs.com/), [TypeScript](https://www.typescriptlang.org/) and [Webpack](https://webpack.js.org/)
 
 To run the package.
 
@@ -11,5 +11,5 @@ npm install
 npm run start
 ```
 
-[Puzzle game
+[Runner game
 ](https://mvc-runner-game.web.app/)

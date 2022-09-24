@@ -14,8 +14,8 @@ export class App {
 
   constructor() {
     this.render = PIXI.autoDetectRenderer({
-      width: constants.GAME_AREA_SIZE_L,
-      height: constants.GAME_AREA_SIZE_S,
+      width: constants.GAME_AREA_WIDTH,
+      height: constants.GAME_AREA_HEIGHT,
       backgroundColor: 0xff0000,
       resolution: window.devicePixelRatio,
     });
@@ -54,8 +54,8 @@ export class App {
 
   // Resize game.
   resize() {
-    let h = constants.GAME_AREA_SIZE_S;
-    let w = constants.GAME_AREA_SIZE_L;
+    let h = constants.GAME_AREA_HEIGHT;
+    let w = constants.GAME_AREA_WIDTH;
 
     let heightRatio = 1,
       widthRation = 1;

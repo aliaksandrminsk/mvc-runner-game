@@ -27,8 +27,8 @@ export class FinalScene extends PIXI.utils.EventEmitter {
     this.popup = new PIXI.Graphics();
     const width = 600;
     const height = 400;
-    const x = constants.GAME_AREA_SIZE_L / 2 - width / 2;
-    const y = constants.GAME_AREA_SIZE_S / 2 - height / 2;
+    const x = constants.GAME_AREA_WIDTH / 2 - width / 2;
+    const y = constants.GAME_AREA_HEIGHT / 2 - height / 2;
     this.popup.beginFill(0x000000, 0.5);
     this.popup.drawRect(x, y, width, height);
     this.container.addChild(this.popup);
@@ -36,8 +36,8 @@ export class FinalScene extends PIXI.utils.EventEmitter {
 
   createLabelScore(amount) {
     this.labelScore = new LabelScore(
-      constants.GAME_AREA_SIZE_L / 2,
-      constants.GAME_AREA_SIZE_S / 2 - 100,
+      constants.GAME_AREA_WIDTH / 2,
+      constants.GAME_AREA_HEIGHT / 2 - 100,
       0.5
     );
     this.labelScore.renderScore(amount);
@@ -47,8 +47,8 @@ export class FinalScene extends PIXI.utils.EventEmitter {
   createText() {
     const text = new PIXI.Text();
     text.anchor.set(0.5);
-    text.x = constants.GAME_AREA_SIZE_L / 2;
-    text.y = constants.GAME_AREA_SIZE_S / 2 + 100;
+    text.x = constants.GAME_AREA_WIDTH / 2;
+    text.y = constants.GAME_AREA_HEIGHT / 2 + 100;
     text.style = {
       fontFamily: "Verdana",
       fontWeight: "normal",
