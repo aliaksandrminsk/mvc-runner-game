@@ -33,20 +33,14 @@ export class App {
 
   //** Start game.
   start() {
-
     // Create game MVC.
     this._gameModel = new Game();
     this._gameView = new GameView(this._gameModel);
     this._gameController = new GameController(this._gameModel, this._gameView);
 
     // Size and resize game.
-    const { h, w } = this.check_device();
-    this.render.view.style.display = "block";
-    this.render.view.style.width = w + "px";
-    this.render.view.style.height = h + "px";
-    //window.addEventListener("resize", () => this.resize());
-    //this.resize();
-    //this.resize();
+    window.addEventListener("resize", () => this.resize());
+    this.resize();
 
     // Render game.
     this.render.render(this._gameView.container);
@@ -58,44 +52,27 @@ export class App {
     });
   }
 
-  // Get screen size.
-  check_device() {
-    let h, w;
-    h = constants.GAME_AREA_SIZE_S;
-    w = constants.GAME_AREA_SIZE_L;
-
-    let heightRatio = 1, widthRation = 1;
-    if(w>window.innerWidth) {
-      widthRation = w / window.innerWidth;
-    }
-    if(h>window.innerHeight) {
-      heightRatio = h/window.innerHeight;
-    }
-    if(widthRation>heightRatio) {
-      h = h/widthRation;
-      w = w/widthRation;
-    } else {
-      h = h/heightRatio;
-      w = w/heightRatio;
-    }
-    return {
-      h,
-      w,
-    };
-  }
-
   // Resize game.
-  // resize() {
-  //   const ratio = constants.GAME_AREA_SIZE_L / constants.GAME_AREA_SIZE_S;
-  //   let w, h;
-  //   if (window.innerWidth / window.innerHeight >= ratio) {
-  //     w = window.innerHeight * ratio;
-  //     h = window.innerHeight;
-  //   } else {
-  //     w = window.innerWidth;
-  //     h = window.innerWidth / ratio;
-  //   }
-  //   this.render.view.style.width = w + "px";
-  //   this.render.view.style.height = h + "px";
-  // }
+  resize() {
+    let h = constants.GAME_AREA_SIZE_S;
+    let w = constants.GAME_AREA_SIZE_L;
+
+    let heightRatio = 1,
+      widthRation = 1;
+    if (w > document.body.clientWidth) {
+      widthRation = w / document.body.clientWidth;
+    }
+    if (h > document.body.clientHeight) {
+      heightRatio = h / document.body.clientHeight;
+    }
+    if (widthRation > heightRatio) {
+      h = h / widthRation;
+      w = w / widthRation;
+    } else {
+      h = h / heightRatio;
+      w = w / heightRatio;
+    }
+    this.render.view.style.width = w + "px";
+    this.render.view.style.height = h + "px";
+  }
 }
