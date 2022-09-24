@@ -40,9 +40,13 @@ export class App {
     this._gameController = new GameController(this._gameModel, this._gameView);
 
     // Size and resize game.
-    window.addEventListener("resize", () => this.resize());
-    this.resize();
-    this.resize();
+    const { h, w } = this.check_device();
+    this.render.view.style.display = "block";
+    this.render.view.style.width = w + "px";
+    this.render.view.style.height = h + "px";
+    //window.addEventListener("resize", () => this.resize());
+    //this.resize();
+    //this.resize();
 
     // Render game.
     this.render.render(this._gameView.container);
@@ -54,18 +58,44 @@ export class App {
     });
   }
 
-  // Resize game.
-  resize() {
-    const ratio = constants.GAME_AREA_SIZE_L / constants.GAME_AREA_SIZE_S;
-    let w, h;
-    if (window.innerWidth / window.innerHeight >= ratio) {
-      w = window.innerHeight * ratio;
-      h = window.innerHeight;
-    } else {
-      w = window.innerWidth;
-      h = window.innerWidth / ratio;
+  // Get screen size.
+  check_device() {
+    let h, w;
+    h = constants.GAME_AREA_SIZE_S;
+    w = constants.GAME_AREA_SIZE_L;
+
+    let heightRatio = 1, widthRation = 1;
+    if(w>window.innerWidth) {
+      widthRation = w / window.innerWidth;
     }
-    this.render.view.style.width = w + "px";
-    this.render.view.style.height = h + "px";
+    if(h>window.innerHeight) {
+      heightRatio = h/window.innerHeight;
+    }
+    if(widthRation>heightRatio) {
+      h = h/widthRation;
+      w = w/widthRation;
+    } else {
+      h = h/heightRatio;
+      w = w/heightRatio;
+    }
+    return {
+      h,
+      w,
+    };
   }
+
+  // Resize game.
+  // resize() {
+  //   const ratio = constants.GAME_AREA_SIZE_L / constants.GAME_AREA_SIZE_S;
+  //   let w, h;
+  //   if (window.innerWidth / window.innerHeight >= ratio) {
+  //     w = window.innerHeight * ratio;
+  //     h = window.innerHeight;
+  //   } else {
+  //     w = window.innerWidth;
+  //     h = window.innerWidth / ratio;
+  //   }
+  //   this.render.view.style.width = w + "px";
+  //   this.render.view.style.height = h + "px";
+  // }
 }
