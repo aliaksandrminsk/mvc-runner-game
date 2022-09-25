@@ -12,6 +12,6 @@ export const assetsMap = {
   ],
   sounds: [
     { name: "music", url: "./sounds/music.mp3" },
-    { name: "click", url: "./sounds/click.mp3" },
+    { name: "jumpSound", url: "./sounds/click.mp3" },
   ],
 };

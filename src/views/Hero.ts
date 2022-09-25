@@ -2,11 +2,13 @@ import * as PIXI from "pixi.js";
 import { constants } from "../constants";
 import { Platform } from "./Platform";
 import { GameViewEvent } from "../events/GameViewEvent";
+import { Sound } from "@pixi/sound";
 
 export class Hero {
   private score: number;
   private dy: number;
   private jumpIndex: number;
+  private jumpSound: Sound;
   public platform: Platform | null;
   public sprite: PIXI.AnimatedSprite;
 
@@ -18,6 +20,8 @@ export class Hero {
 
     this.sprite = new PIXI.AnimatedSprite([PIXI.Texture.from("jump")]);
     this.setAppearance(true);
+
+    this.jumpSound = Sound.from(PIXI.Loader.shared.resources.jumpSound);
 
     this.sprite.x = 100;
     this.sprite.y = 100;
@@ -37,6 +41,7 @@ export class Hero {
       this.platform = null;
       this.dy = -18;
       this.setAppearance(true);
+      this.jumpSound.play();
     }
   }
 
