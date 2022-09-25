@@ -1,6 +1,5 @@
-import * as PIXI from "pixi.js";
 import { Diamond } from "./Diamond";
-import { Texture } from "pixi.js";
+import { Texture, Container, Sprite } from "pixi.js";
 import { constants } from "../constants";
 import { Hero } from "./Hero";
 
@@ -15,7 +14,7 @@ export class Platform {
   private readonly width: number;
   private readonly height: number;
   private readonly dx: number;
-  public container: PIXI.Container;
+  public container: Container;
 
   constructor(rows: number, cols: number, x: number) {
     this.diamonds = [];
@@ -30,7 +29,7 @@ export class Platform {
     this.width = cols * TileSize;
     this.height = rows * TileSize;
 
-    this.container = new PIXI.Container();
+    this.container = new Container();
     this.container.x = x;
     this.container.y = constants.GAME_AREA_HEIGHT - this.rows * TileSize;
 
@@ -116,7 +115,7 @@ export class Platform {
 
   createTile(row: number, col: number) {
     const texture = row === 0 ? "platform" : "tile";
-    const tile = new PIXI.Sprite(Texture.from(texture));
+    const tile = new Sprite(Texture.from(texture));
 
     this.container.addChild(tile);
     tile.x = col * tile.width;

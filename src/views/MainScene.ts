@@ -1,4 +1,4 @@
-import * as PIXI from "pixi.js";
+import { Loader, Ticker } from "pixi.js";
 import { Background } from "./Background";
 import { Platforms } from "./Platforms";
 import { Hero } from "./Hero";
@@ -26,12 +26,12 @@ export class MainScene extends Scene {
     this.createHero();
     this.createUI();
 
-    this.sound = Sound.from(PIXI.Loader.shared.resources.music);
+    this.sound = Sound.from(Loader.shared.resources.music);
     this.sound.play({
       loop: true,
     });
 
-    const ticker = PIXI.Ticker.shared;
+    const ticker = Ticker.shared;
     ticker.add((dt) => {
       this.update(dt);
     });

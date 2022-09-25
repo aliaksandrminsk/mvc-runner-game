@@ -1,17 +1,17 @@
-import * as PIXI from "pixi.js";
+import { Container } from "pixi.js";
 import { Platform } from "./Platform";
 import { constants } from "../constants";
 import { Hero } from "./Hero";
 
 export class Platforms {
-  public container: PIXI.Container;
+  public container: Container;
   private platforms: Array<Platform>;
   private ranges: any;
   private current: Platform | null = null;
 
   constructor() {
     this.platforms = [];
-    this.container = new PIXI.Container();
+    this.container = new Container();
     this.ranges = {
       rows: {
         min: 2,

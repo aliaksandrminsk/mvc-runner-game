@@ -1,4 +1,4 @@
-import * as PIXI from "pixi.js";
+import { Loader, AnimatedSprite, Texture } from "pixi.js";
 import { constants } from "../constants";
 import { Platform } from "./Platform";
 import { GameViewEvent } from "../events/GameViewEvent";
@@ -9,16 +9,16 @@ export class Hero {
   protected jumpIndex: number;
   protected jumpSound: Sound;
   public platform: Platform | null;
-  public sprite: PIXI.AnimatedSprite;
+  public sprite: AnimatedSprite;
 
   constructor() {
     this.dy = 0;
     this.jumpIndex = 0;
     this.platform = null;
 
-    this.jumpSound = Sound.from(PIXI.Loader.shared.resources.jumpSound);
+    this.jumpSound = Sound.from(Loader.shared.resources.jumpSound);
 
-    this.sprite = new PIXI.AnimatedSprite([PIXI.Texture.from("jump")]);
+    this.sprite = new AnimatedSprite([Texture.from("jump")]);
     this.sprite.x = 100;
     this.sprite.y = 100;
     this.sprite.loop = true;
@@ -76,14 +76,14 @@ export class Hero {
 
   setAppearance(isJump: boolean) {
     if (isJump) {
-      this.sprite.textures = [PIXI.Texture.from("jump")];
+      this.sprite.textures = [Texture.from("jump")];
       this.sprite.stop();
     } else {
       this.sprite.textures = [
-        PIXI.Texture.from("walk1"),
-        PIXI.Texture.from("walk2"),
-        PIXI.Texture.from("walk3"),
-        PIXI.Texture.from("walk4"),
+        Texture.from("walk1"),
+        Texture.from("walk2"),
+        Texture.from("walk3"),
+        Texture.from("walk4"),
       ];
       this.sprite.play();
     }

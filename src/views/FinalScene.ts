@@ -1,5 +1,5 @@
-import * as PIXI from "pixi.js";
 import { Background } from "./Background";
+import { Graphics, Text } from "pixi.js";
 import { LabelScore } from "./LabelScore";
 import { GameViewEvent } from "../events/GameViewEvent";
 import { constants } from "../constants";
@@ -7,7 +7,7 @@ import { Game } from "../models/Game";
 import { Scene } from "./Scene";
 
 export class FinalScene extends Scene {
-  protected popup: PIXI.Graphics | null = null;
+  protected popup: Graphics | null = null;
 
   constructor(game: Game) {
     super();
@@ -27,7 +27,7 @@ export class FinalScene extends Scene {
   }
 
   createPopup() {
-    this.popup = new PIXI.Graphics();
+    this.popup = new Graphics();
     const width = 600;
     const height = 400;
     const x = constants.GAME_AREA_WIDTH / 2 - width / 2;
@@ -48,7 +48,7 @@ export class FinalScene extends Scene {
   }
 
   createText() {
-    const text = new PIXI.Text();
+    const text = new Text();
     text.anchor.set(0.5);
     text.x = constants.GAME_AREA_WIDTH / 2;
     text.y = constants.GAME_AREA_HEIGHT / 2 + 100;
