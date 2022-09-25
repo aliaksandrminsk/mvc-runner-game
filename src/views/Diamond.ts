@@ -23,6 +23,14 @@ export class Diamond {
   }
 
   isOverlap(hero: Hero) {
+    if (
+      this.top === null ||
+      this.bottom === null ||
+      this.left === null ||
+      this.right === null
+    ) {
+      return false;
+    }
     return (
       hero.bottom >= this.top &&
       hero.top <= this.bottom &&
@@ -34,32 +42,28 @@ export class Diamond {
   get left() {
     if (this.sprite) {
       return this.sprite.x + this.sprite.parent.x;
-    } else {
-      return 0;
     }
+    return null;
   }
 
   get right() {
     if (this.sprite) {
-      return this.left + this.sprite.width;
-    } else {
-      return 0;
+      return this.sprite.x + this.sprite.parent.x + this.sprite.width;
     }
+    return null;
   }
 
   get top() {
     if (this.sprite) {
       return this.sprite.y + this.sprite.parent.y;
-    } else {
-      return 0;
     }
+    return null;
   }
 
   get bottom() {
     if (this.sprite) {
-      return this.top + this.sprite.height;
-    } else {
-      return 0;
+      return this.sprite.y + this.sprite.parent.y + this.sprite.height;
     }
+    return null;
   }
 }

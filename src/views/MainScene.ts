@@ -4,7 +4,6 @@ import { Platforms } from "./Platforms";
 import { Hero } from "./Hero";
 import { LabelScore } from "./LabelScore";
 import { GameViewEvent } from "../events/GameViewEvent";
-import { HeroViewEvent } from "../events/HeroViewEvent";
 import { Sound } from "@pixi/sound";
 import { GameModelEvent } from "../events/GameModelEvent";
 import { Game } from "../models/Game";
@@ -64,7 +63,7 @@ export class MainScene extends PIXI.utils.EventEmitter {
     this.container.on("pointerdown", () => {
       if (this.hero) this.hero.startJump();
     });
-    this.hero.sprite.once(HeroViewEvent.HERO_DIE, () => {
+    this.hero.sprite.once("die", () => {
       window.dispatchEvent(new Event(GameViewEvent.HERO_DIE));
     });
   }
@@ -72,7 +71,7 @@ export class MainScene extends PIXI.utils.EventEmitter {
   update(dt: number) {
     if (this.bg) this.bg.update(dt);
     if (this.platforms) {
-      this.platforms.checkCollision(this.hero);
+      if (this.hero) this.platforms.checkCollision(this.hero);
       this.platforms.update();
     }
     if (this.hero) this.hero.update();

@@ -1,7 +1,7 @@
 import * as PIXI from "pixi.js";
 import { constants } from "../constants";
-import { HeroViewEvent } from "../events/HeroViewEvent";
 import { Platform } from "./Platform";
+import { GameViewEvent } from "../events/GameViewEvent";
 
 export class Hero {
   private score: number;
@@ -28,7 +28,7 @@ export class Hero {
 
   collectDiamond() {
     ++this.score;
-    window.dispatchEvent(new Event(HeroViewEvent.DIAMOND_COLLECT));
+    window.dispatchEvent(new Event(GameViewEvent.DIAMOND_COLLECT));
   }
 
   startJump() {
@@ -97,7 +97,7 @@ export class Hero {
     }
 
     if (this.sprite.y > constants.GAME_AREA_HEIGHT) {
-      this.sprite.emit(HeroViewEvent.HERO_DIE);
+      this.sprite.emit("die");
     }
   }
 }

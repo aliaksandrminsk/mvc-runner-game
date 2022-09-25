@@ -1,7 +1,6 @@
 import { Game } from "../models/Game";
 import { GameView } from "../views/GameView";
-import {GameViewEvent} from "../events/GameViewEvent";
-import {HeroViewEvent} from "../events/HeroViewEvent";
+import { GameViewEvent } from "../events/GameViewEvent";
 
 export class GameController {
   private readonly _gameModel: Game;
@@ -13,8 +12,12 @@ export class GameController {
 
     //** Add listeners to the GameController.
     window.addEventListener(GameViewEvent.HERO_DIE, () => this.loseGame());
-    window.addEventListener(GameViewEvent.FINAL_SCENE_CLICKED, () => this.startGame());
-    window.addEventListener(HeroViewEvent.DIAMOND_COLLECT, () => this.collectDiamond());
+    window.addEventListener(GameViewEvent.FINAL_SCENE_CLICKED, () =>
+      this.startGame()
+    );
+    window.addEventListener(GameViewEvent.DIAMOND_COLLECT, () =>
+      this.collectDiamond()
+    );
   }
 
   private get gameModel(): Game {
@@ -36,5 +39,4 @@ export class GameController {
   protected collectDiamond() {
     this.gameModel.score++;
   }
-
 }
