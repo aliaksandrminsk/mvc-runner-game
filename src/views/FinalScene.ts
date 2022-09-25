@@ -4,14 +4,13 @@ import { LabelScore } from "./LabelScore";
 import { GameViewEvent } from "../events/GameViewEvent";
 import { constants } from "../constants";
 import { Game } from "../models/Game";
+import { Scene } from "./Scene";
 
-export class FinalScene extends PIXI.utils.EventEmitter {
-  public container: PIXI.Container;
+export class FinalScene extends Scene {
   protected popup: PIXI.Graphics | null = null;
 
   constructor(game: Game) {
     super();
-    this.container = new PIXI.Container();
     this.createBackground();
     this.createPopup();
     this.createLabelScore(game.score);
@@ -63,9 +62,5 @@ export class FinalScene extends PIXI.utils.EventEmitter {
     if (this.popup) {
       this.popup.addChild(text);
     }
-  }
-
-  destroy() {
-    this.container.destroy();
   }
 }

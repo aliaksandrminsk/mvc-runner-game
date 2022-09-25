@@ -7,10 +7,10 @@ import { GameViewEvent } from "../events/GameViewEvent";
 import { Sound } from "@pixi/sound";
 import { GameModelEvent } from "../events/GameModelEvent";
 import { Game } from "../models/Game";
+import { Scene } from "./Scene";
 
-export class MainScene extends PIXI.utils.EventEmitter {
+export class MainScene extends Scene {
   protected game: Game;
-  public container: PIXI.Container;
   protected sound: Sound;
 
   protected hero: Hero | null = null;
@@ -19,7 +19,6 @@ export class MainScene extends PIXI.utils.EventEmitter {
 
   constructor(game: Game) {
     super();
-    this.container = new PIXI.Container();
     this.game = game;
 
     this.createBackground();
@@ -78,7 +77,7 @@ export class MainScene extends PIXI.utils.EventEmitter {
   }
 
   destroy() {
-    this.container.destroy();
+    super.destroy();
     this.sound.stop();
   }
 }

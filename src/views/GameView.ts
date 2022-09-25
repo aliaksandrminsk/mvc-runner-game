@@ -1,14 +1,15 @@
 import { Game } from "../models/Game";
 import * as PIXI from "pixi.js";
 import { GameModelEvent } from "../events/GameModelEvent";
-import {FinalScene} from "./FinalScene";
-import {MainScene} from "./MainScene";
+import { FinalScene } from "./FinalScene";
+import { MainScene } from "./MainScene";
+import { Scene } from "./Scene";
 
 export class GameView extends PIXI.utils.EventEmitter {
   private readonly _game: Game;
 
   public container: PIXI.Container;
-  public scene: any;
+  public scene: Scene | null = null;
 
   constructor(game: Game) {
     super();
@@ -31,17 +32,18 @@ export class GameView extends PIXI.utils.EventEmitter {
   }
 
   setGameState() {
-     if (this.scene) {
-       this.container.removeChild(this.scene.container)
-       this.scene.destroy();
-       this.scene = null;
-     }
+    if (this.scene) {
+      this.container.removeChild(this.scene.container);
+      this.scene.destroy();
+      this.scene = null;
+    }
     if (this.game.scene === "main") {
-
       this.scene = new MainScene(this.game);
     } else if (this.game.scene === "final") {
       this.scene = new FinalScene(this.game);
     }
-    this.container.addChild(this.scene.container);
+    if (this.scene) {
+      this.container.addChild(this.scene.container);
+    }
   }
 }
