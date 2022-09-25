@@ -3,10 +3,21 @@ import { Platform } from "./Platform";
 import { constants } from "../constants";
 import { Hero } from "./Hero";
 
+interface IRange {
+  min: number;
+  max: number;
+}
+
+interface IPlatformParameters {
+  rows: number;
+  cols: number;
+  x: number;
+}
+
 export class Platforms {
   public container: Container;
   private platforms: Array<Platform>;
-  private ranges: any;
+  private ranges: { rows: IRange; cols: IRange; offset: IRange };
   private current: Platform | null = null;
 
   constructor() {
@@ -57,7 +68,7 @@ export class Platforms {
     return data;
   }
 
-  createPlatform(data: any) {
+  createPlatform(data: IPlatformParameters) {
     const platform = new Platform(data.rows, data.cols, data.x);
     this.container.addChild(platform.container);
     this.platforms.push(platform);
