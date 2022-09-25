@@ -5,33 +5,27 @@ import { GameViewEvent } from "../events/GameViewEvent";
 import { Sound } from "@pixi/sound";
 
 export class Hero {
-  private score: number;
-  private dy: number;
-  private jumpIndex: number;
-  private jumpSound: Sound;
+  protected dy: number;
+  protected jumpIndex: number;
+  protected jumpSound: Sound;
   public platform: Platform | null;
   public sprite: PIXI.AnimatedSprite;
 
   constructor() {
-    this.score = 0;
     this.dy = 0;
     this.jumpIndex = 0;
     this.platform = null;
 
-    this.sprite = new PIXI.AnimatedSprite([PIXI.Texture.from("jump")]);
-    this.setAppearance(true);
-
     this.jumpSound = Sound.from(PIXI.Loader.shared.resources.jumpSound);
 
+    this.sprite = new PIXI.AnimatedSprite([PIXI.Texture.from("jump")]);
     this.sprite.x = 100;
     this.sprite.y = 100;
     this.sprite.loop = true;
     this.sprite.animationSpeed = 0.1;
-    this.sprite.play();
   }
 
   collectDiamond() {
-    ++this.score;
     window.dispatchEvent(new Event(GameViewEvent.DIAMOND_COLLECT));
   }
 
