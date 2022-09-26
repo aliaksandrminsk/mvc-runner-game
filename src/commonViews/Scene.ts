@@ -1,11 +1,10 @@
-import * as PIXI from "pixi.js";
+import { Container } from "pixi.js";
 
-export class Scene extends PIXI.utils.EventEmitter {
-  public container: PIXI.Container;
+export class Scene {
+  public container: Container;
 
   protected constructor() {
-    super();
-    this.container = new PIXI.Container();
+    this.container = new Container();
   }
 
   destroy() {

@@ -1,9 +1,7 @@
 import { Background } from "../commonViews/Background";
 import { Graphics, Text } from "pixi.js";
 import { LabelScore } from "../commonViews/LabelScore";
-//import { GameEvents } from "../GameEvents";
 import { GameConstants } from "../GameConstants";
-//import { GameModel } from "../GameModel";
 import { Scene } from "../commonViews/Scene";
 
 export class FinalSceneView extends Scene {
@@ -13,12 +11,8 @@ export class FinalSceneView extends Scene {
     super();
     this.createBackground();
     this.createPopup();
-    //this.createLabelScore(game.score);
     this.createText();
     this.container.interactive = true;
-    // this.container.once("pointerdown", () => {
-    //   window.dispatchEvent(new Event(GameEvents.FINAL_SCENE_CLICKED));
-    // });
   }
 
   createBackground() {

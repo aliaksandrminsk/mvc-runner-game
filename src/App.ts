@@ -6,10 +6,6 @@ import { GameModel } from "./GameModel";
 import { GameConstants } from "./GameConstants";
 
 export class App {
-  protected _gameModel: GameModel | null = null;
-  protected _gameController: GameController | null = null;
-  protected _gameView: GameView | null = null;
-
   private render: PIXI.AbstractRenderer;
 
   constructor() {
@@ -34,20 +30,20 @@ export class App {
   //** Start game.
   start() {
     // Create game MVC.
-    this._gameModel = new GameModel();
-    this._gameView = new GameView();
-    this._gameController = new GameController(this._gameModel, this._gameView);
+    const gameModel = new GameModel();
+    const gameView = new GameView();
+    new GameController(gameModel, gameView);
 
     // Size and resize game.
     window.addEventListener("resize", () => this.resize());
     this.resize();
 
     // Render game.
-    this.render.render(this._gameView.container);
+    this.render.render(gameView.container);
     const ticker = PIXI.Ticker.shared;
     ticker.add(() => {
-      if (this._gameView) {
-        this.render.render(this._gameView.container);
+      if (gameView) {
+        this.render.render(gameView.container);
       }
     });
   }
