@@ -1,15 +1,16 @@
-//import { GameEvents } from "../GameEvents";
-//import { Scene } from "../commonViews/Scene";
 import { globalEvent } from "@billjs/event-emitter";
-
 import { GameModel, GameScene } from "../GameModel";
 import { MainSceneView } from "./MainSceneView";
 import { GameEvents } from "../GameEvents";
 import { MainSceneEvents } from "./MainSceneEvents";
+import { Loader, Ticker } from "pixi.js";
+import { Sound } from "@pixi/sound";
 
 export class MainSceneController {
   protected view: MainSceneView;
   protected model: GameModel;
+  protected ticker: Ticker;
+  protected sound: Sound;
 
   boundPointerdown = () => this.pointerdownHandler();
   boundDieHero = () => this.dieHeroHandler();
@@ -24,6 +25,18 @@ export class MainSceneController {
     globalEvent.on(MainSceneEvents.DIAMOND_COLLECT, this.boundCollectDiamond);
     this.view.hero.sprite.on(MainSceneEvents.HERO_DIE, this.boundDieHero);
     this.view.container.on("pointerdown", this.boundPointerdown);
+
+    //** Create ticker.
+    this.ticker = Ticker.shared;
+    this.ticker.add((dt) => {
+      this.view.update(dt);
+    });
+
+    //** Create sound.
+    this.sound = Sound.from(Loader.shared.resources.music);
+    this.sound.play({
+      loop: true,
+    });
   }
 
   protected changeScoreHandler() {
@@ -35,7 +48,6 @@ export class MainSceneController {
   }
 
   protected dieHeroHandler() {
-    console.log("MainSceneController dieHeroHandler 12");
     this.model.scene = GameScene.FINAL;
   }
 
@@ -44,9 +56,10 @@ export class MainSceneController {
   }
 
   destroy() {
+    this.ticker.destroy();
+    this.sound.stop();
     globalEvent.off(GameEvents.CHANGE_SCORE, this.boundChangeScore);
     globalEvent.off(MainSceneEvents.DIAMOND_COLLECT, this.boundCollectDiamond);
-    // globalEvent.off(GameEvents.HERO_DIE, this.boundDieHero);
     this.view.hero.sprite.off(MainSceneEvents.HERO_DIE, this.boundDieHero);
     this.view.container.off("pointerdown", this.boundPointerdown);
   }

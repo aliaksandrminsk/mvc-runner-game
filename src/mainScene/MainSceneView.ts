@@ -1,14 +1,10 @@
-import { Loader, Ticker } from "pixi.js";
 import { Background } from "../common/Background";
 import { Platforms } from "./Platforms";
 import { Hero } from "./Hero";
 import { LabelScore } from "../common/LabelScore";
-import { Sound } from "@pixi/sound";
 import { Scene } from "../common/Scene";
 
 export class MainSceneView extends Scene {
-  protected sound: Sound;
-
   public hero: Hero;
   protected bg: Background;
   protected platforms: Platforms;
@@ -33,17 +29,6 @@ export class MainSceneView extends Scene {
     this.hero = new Hero();
     this.container.addChild(this.hero.sprite);
     this.container.interactive = true;
-
-    //** Create sound.
-    this.sound = Sound.from(Loader.shared.resources.music);
-    this.sound.play({
-      loop: true,
-    });
-
-    const ticker = Ticker.shared;
-    ticker.add((dt) => {
-      this.update(dt);
-    });
   }
 
   setScoreValue(value: number) {
@@ -59,10 +44,5 @@ export class MainSceneView extends Scene {
       this.platforms.update();
     }
     if (this.hero) this.hero.update();
-  }
-
-  destroy() {
-    super.destroy();
-    this.sound.stop();
   }
 }

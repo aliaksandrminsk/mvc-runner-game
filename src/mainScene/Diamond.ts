@@ -23,14 +23,10 @@ export class Diamond {
   }
 
   isOverlap(hero: Hero) {
-    if (
-      this.top === null ||
-      this.bottom === null ||
-      this.left === null ||
-      this.right === null
-    ) {
-      return false;
-    }
+    if (this.top === null) return false;
+    if (this.bottom === null) return false;
+    if (this.left === null) return false;
+    if (this.right === null) return false;
     return (
       hero.bottom >= this.top &&
       hero.top <= this.bottom &&
