@@ -8,5 +8,6 @@ declare global {
 }
 
 window.PIXI = PIXI;
+1;
 const app = new App();
 app.run();
