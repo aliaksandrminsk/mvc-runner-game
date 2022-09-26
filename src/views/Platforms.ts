@@ -1,6 +1,6 @@
 import { Container } from "pixi.js";
 import { Platform } from "./Platform";
-import { constants } from "../constants";
+import { GameConstants } from "../GameConstants";
 import { Hero } from "./Hero";
 
 interface IRange {
@@ -87,7 +87,7 @@ export class Platforms {
   }
 
   update() {
-    if (this.current && this.current.right < constants.GAME_AREA_WIDTH) {
+    if (this.current && this.current.right < GameConstants.GAME_AREA_WIDTH) {
       this.createPlatform(this.randomData);
     }
 

@@ -1,15 +1,15 @@
 import { Background } from "./Background";
 import { Graphics, Text } from "pixi.js";
 import { LabelScore } from "./LabelScore";
-import { GameViewEvent } from "../events/GameViewEvent";
-import { constants } from "../constants";
-import { Game } from "../models/Game";
+import { GameEvents } from "../GameEvents";
+import { GameConstants } from "../GameConstants";
+import { GameModel } from "../GameModel";
 import { Scene } from "./Scene";
 
 export class FinalScene extends Scene {
   protected popup: Graphics | null = null;
 
-  constructor(game: Game) {
+  constructor(game: GameModel) {
     super();
     this.createBackground();
     this.createPopup();
@@ -17,7 +17,7 @@ export class FinalScene extends Scene {
     this.createText();
     this.container.interactive = true;
     this.container.once("pointerdown", () => {
-      window.dispatchEvent(new Event(GameViewEvent.FINAL_SCENE_CLICKED));
+      window.dispatchEvent(new Event(GameEvents.FINAL_SCENE_CLICKED));
     });
   }
 
@@ -30,8 +30,8 @@ export class FinalScene extends Scene {
     this.popup = new Graphics();
     const width = 600;
     const height = 400;
-    const x = constants.GAME_AREA_WIDTH / 2 - width / 2;
-    const y = constants.GAME_AREA_HEIGHT / 2 - height / 2;
+    const x = GameConstants.GAME_AREA_WIDTH / 2 - width / 2;
+    const y = GameConstants.GAME_AREA_HEIGHT / 2 - height / 2;
     this.popup.beginFill(0x000000, 0.5);
     this.popup.drawRect(x, y, width, height);
     this.container.addChild(this.popup);
@@ -39,8 +39,8 @@ export class FinalScene extends Scene {
 
   createLabelScore(amount: number) {
     const labelScore = new LabelScore(
-      constants.GAME_AREA_WIDTH / 2,
-      constants.GAME_AREA_HEIGHT / 2 - 100,
+      GameConstants.GAME_AREA_WIDTH / 2,
+      GameConstants.GAME_AREA_HEIGHT / 2 - 100,
       0.5
     );
     labelScore.renderScore(amount);
@@ -50,8 +50,8 @@ export class FinalScene extends Scene {
   createText() {
     const text = new Text();
     text.anchor.set(0.5);
-    text.x = constants.GAME_AREA_WIDTH / 2;
-    text.y = constants.GAME_AREA_HEIGHT / 2 + 100;
+    text.x = GameConstants.GAME_AREA_WIDTH / 2;
+    text.y = GameConstants.GAME_AREA_HEIGHT / 2 + 100;
     text.style = {
       fontFamily: "Verdana",
       fontWeight: "normal",

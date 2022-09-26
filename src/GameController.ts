@@ -1,26 +1,26 @@
-import { Game } from "../models/Game";
-import { GameView } from "../views/GameView";
-import { GameViewEvent } from "../events/GameViewEvent";
+import { GameModel } from "./GameModel";
+import { GameView } from "./GameView";
+import { GameEvents } from "./GameEvents";
 
 export class GameController {
-  private readonly _gameModel: Game;
+  private readonly _gameModel: GameModel;
   private readonly _gameView: GameView;
 
-  constructor(game: Game, gameView: GameView) {
+  constructor(game: GameModel, gameView: GameView) {
     this._gameModel = game;
     this._gameView = gameView;
 
     //** Add listeners to the GameController.
-    window.addEventListener(GameViewEvent.HERO_DIE, () => this.loseGame());
-    window.addEventListener(GameViewEvent.FINAL_SCENE_CLICKED, () =>
+    window.addEventListener(GameEvents.HERO_DIE, () => this.loseGame());
+    window.addEventListener(GameEvents.FINAL_SCENE_CLICKED, () =>
       this.startGame()
     );
-    window.addEventListener(GameViewEvent.DIAMOND_COLLECT, () =>
+    window.addEventListener(GameEvents.DIAMOND_COLLECT, () =>
       this.collectDiamond()
     );
   }
 
-  private get gameModel(): Game {
+  private get gameModel(): GameModel {
     return this._gameModel;
   }
 

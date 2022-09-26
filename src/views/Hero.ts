@@ -1,7 +1,7 @@
 import { Loader, AnimatedSprite, Texture } from "pixi.js";
-import { constants } from "../constants";
+import { GameConstants } from "../GameConstants";
 import { Platform } from "./Platform";
-import { GameViewEvent } from "../events/GameViewEvent";
+import { GameEvents } from "../GameEvents";
 import { Sound } from "@pixi/sound";
 
 export class Hero {
@@ -26,7 +26,7 @@ export class Hero {
   }
 
   collectDiamond() {
-    window.dispatchEvent(new Event(GameViewEvent.DIAMOND_COLLECT));
+    window.dispatchEvent(new Event(GameEvents.DIAMOND_COLLECT));
   }
 
   startJump() {
@@ -95,7 +95,7 @@ export class Hero {
       this.sprite.y += this.dy;
     }
 
-    if (this.sprite.y > constants.GAME_AREA_HEIGHT) {
+    if (this.sprite.y > GameConstants.GAME_AREA_HEIGHT) {
       this.sprite.emit("die");
     }
   }

@@ -1,6 +1,0 @@
-//** View event.
-export const GameViewEvent = {
-  FINAL_SCENE_CLICKED: "FINAL_SCENE_CLICKED",
-  HERO_DIE: "HERO_DIE",
-  DIAMOND_COLLECT: "DIAMOND_COLLECT",
-};

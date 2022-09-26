@@ -3,21 +3,20 @@ import { Background } from "./Background";
 import { Platforms } from "./Platforms";
 import { Hero } from "./Hero";
 import { LabelScore } from "./LabelScore";
-import { GameViewEvent } from "../events/GameViewEvent";
+import { GameEvents } from "../GameEvents";
 import { Sound } from "@pixi/sound";
-import { GameModelEvent } from "../events/GameModelEvent";
-import { Game } from "../models/Game";
+import { GameModel } from "../GameModel";
 import { Scene } from "./Scene";
 
 export class MainScene extends Scene {
-  protected game: Game;
+  protected game: GameModel;
   protected sound: Sound;
 
   protected hero: Hero | null = null;
   protected bg: Background | null = null;
   protected platforms: Platforms | null = null;
 
-  constructor(game: Game) {
+  constructor(game: GameModel) {
     super();
     this.game = game;
 
@@ -40,7 +39,7 @@ export class MainScene extends Scene {
   createUI() {
     const labelScore = new LabelScore();
     this.container.addChild(labelScore);
-    this.game.on(GameModelEvent.CHANGE_SCORE, () => {
+    this.game.on(GameEvents.CHANGE_SCORE, () => {
       labelScore.renderScore(this.game.score);
     });
   }
@@ -63,7 +62,7 @@ export class MainScene extends Scene {
       if (this.hero) this.hero.startJump();
     });
     this.hero.sprite.once("die", () => {
-      window.dispatchEvent(new Event(GameViewEvent.HERO_DIE));
+      window.dispatchEvent(new Event(GameEvents.HERO_DIE));
     });
   }
 

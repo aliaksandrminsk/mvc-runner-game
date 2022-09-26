@@ -1,17 +1,17 @@
-import { Game } from "../models/Game";
+import { GameModel } from "./GameModel";
 import * as PIXI from "pixi.js";
-import { GameModelEvent } from "../events/GameModelEvent";
-import { FinalScene } from "./FinalScene";
-import { MainScene } from "./MainScene";
-import { Scene } from "./Scene";
+import { GameEvents } from "./GameEvents";
+import { FinalScene } from "./views/FinalScene";
+import { MainScene } from "./views/MainScene";
+import { Scene } from "./views/Scene";
 
 export class GameView extends PIXI.utils.EventEmitter {
-  private readonly _game: Game;
+  private readonly _game: GameModel;
 
   public container: PIXI.Container;
   public scene: Scene | null = null;
 
-  constructor(game: Game) {
+  constructor(game: GameModel) {
     super();
     this._game = game;
     this.container = new PIXI.Container();
@@ -20,10 +20,10 @@ export class GameView extends PIXI.utils.EventEmitter {
     this.init();
 
     //** Listener.
-    this.game.on(GameModelEvent.CHANGE_GAME_SCENE, () => this.setGameState());
+    this.game.on(GameEvents.CHANGE_GAME_SCENE, () => this.setGameState());
   }
 
-  get game(): Game {
+  get game(): GameModel {
     return this._game;
   }
 

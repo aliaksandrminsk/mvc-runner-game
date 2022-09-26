@@ -1,0 +1,8 @@
+export const GameEvents = {
+  CHANGE_GAME_SCENE: "CHANGE_GAME_SCENE",
+  CHANGE_SCORE: "CHANGE_SCORE",
+  //**************************
+  FINAL_SCENE_CLICKED: "FINAL_SCENE_CLICKED",
+  HERO_DIE: "HERO_DIE",
+  DIAMOND_COLLECT: "DIAMOND_COLLECT",
+};

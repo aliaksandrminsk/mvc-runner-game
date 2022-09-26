@@ -1,12 +1,12 @@
 import * as PIXI from "pixi.js";
 import { Loader } from "./Loader";
-import { GameController } from "./controllers/GameController";
-import { GameView } from "./views/GameView";
-import { Game } from "./models/Game";
-import { constants } from "./constants";
+import { GameController } from "./GameController";
+import { GameView } from "./GameView";
+import { GameModel } from "./GameModel";
+import { GameConstants } from "./GameConstants";
 
 export class App {
-  protected _gameModel: Game | null = null;
+  protected _gameModel: GameModel | null = null;
   protected _gameController: GameController | null = null;
   protected _gameView: GameView | null = null;
 
@@ -14,8 +14,8 @@ export class App {
 
   constructor() {
     this.render = PIXI.autoDetectRenderer({
-      width: constants.GAME_AREA_WIDTH,
-      height: constants.GAME_AREA_HEIGHT,
+      width: GameConstants.GAME_AREA_WIDTH,
+      height: GameConstants.GAME_AREA_HEIGHT,
       backgroundColor: 0xff0000,
       resolution: window.devicePixelRatio,
     });
@@ -34,7 +34,7 @@ export class App {
   //** Start game.
   start() {
     // Create game MVC.
-    this._gameModel = new Game();
+    this._gameModel = new GameModel();
     this._gameView = new GameView(this._gameModel);
     this._gameController = new GameController(this._gameModel, this._gameView);
 
@@ -54,8 +54,8 @@ export class App {
 
   // Resize game.
   resize() {
-    let h = constants.GAME_AREA_HEIGHT;
-    let w = constants.GAME_AREA_WIDTH;
+    let h = GameConstants.GAME_AREA_HEIGHT;
+    let w = GameConstants.GAME_AREA_WIDTH;
 
     let heightRatio = 1,
       widthRation = 1;

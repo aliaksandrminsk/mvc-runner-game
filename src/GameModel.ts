@@ -1,14 +1,13 @@
 import * as PIXI from "pixi.js";
-import { GameModelEvent } from "../events/GameModelEvent";
+import { GameEvents } from "./GameEvents";
 
-export class Game extends PIXI.utils.EventEmitter {
-
+export class GameModel extends PIXI.utils.EventEmitter {
   protected _scene: string = "main";
   protected _score: number = 0;
 
   public set scene(value: string) {
     this._scene = value;
-    this.emit(GameModelEvent.CHANGE_GAME_SCENE);
+    this.emit(GameEvents.CHANGE_GAME_SCENE);
   }
 
   public get scene(): string {
@@ -17,7 +16,7 @@ export class Game extends PIXI.utils.EventEmitter {
 
   public set score(value: number) {
     this._score = value;
-    this.emit(GameModelEvent.CHANGE_SCORE);
+    this.emit(GameEvents.CHANGE_SCORE);
   }
 
   public get score(): number {

@@ -1,6 +1,6 @@
 import { Diamond } from "./Diamond";
 import { Texture, Container, Sprite } from "pixi.js";
-import { constants } from "../constants";
+import { GameConstants } from "../GameConstants";
 import { Hero } from "./Hero";
 
 const TileSize = 64;
@@ -31,7 +31,7 @@ export class Platform {
 
     this.container = new Container();
     this.container.x = x;
-    this.container.y = constants.GAME_AREA_HEIGHT - this.rows * TileSize;
+    this.container.y = GameConstants.GAME_AREA_HEIGHT - this.rows * TileSize;
 
     this.createTiles();
     this.createDiamonds();
