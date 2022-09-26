@@ -1,8 +1,8 @@
-import { Background } from "../commonViews/Background";
+import { Background } from "../common/Background";
 import { Graphics, Text } from "pixi.js";
-import { LabelScore } from "../commonViews/LabelScore";
+import { LabelScore } from "../common/LabelScore";
 import { GameConstants } from "../GameConstants";
-import { Scene } from "../commonViews/Scene";
+import { Scene } from "../common/Scene";
 
 export class FinalSceneView extends Scene {
   protected popup: Graphics | null = null;

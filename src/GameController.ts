@@ -30,23 +30,24 @@ export class GameController {
 
   //** Set game state.
   protected setGameState() {
+    console.log("setGameState ", this.gameModel.scene);
     if (this.gameModel.scene === GameScene.MAIN) {
       this.gameModel.score = 0;
-      this.gameView.setGameState(GameScene.MAIN);
       if (this.finalSceneController) {
         this.finalSceneController.destroy();
         this.finalSceneController = null;
       }
+      this.gameView.setGameState(GameScene.MAIN);
       this.mainSceneController = new MainSceneController(
         this.gameView.scene as MainSceneView,
         this.gameModel
       );
     } else if (this.gameModel.scene === GameScene.FINAL) {
-      this.gameView.setGameState(GameScene.FINAL);
       if (this.mainSceneController) {
         this.mainSceneController.destroy();
         this.mainSceneController = null;
       }
+      this.gameView.setGameState(GameScene.FINAL);
       this.finalSceneController = new FinalSceneController(
         this.gameView.scene as FinalSceneView,
         this.gameModel
