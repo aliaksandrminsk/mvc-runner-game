@@ -8,18 +8,13 @@
     "@tweenjs/tween.js": "^18.6.4",
     "typescript": "^4.6.3"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
   "scripts": {
     "start": "cross-env NODE_ENV=development webpack-dev-server --mode development --open",
     "build": "cross-env NODE_ENV=production webpack --mode production",
     "dev": "cross-env NODE_ENV=development webpack --mode development",
-    "prepare": "husky install",
     "lint": "eslint --debug src/",
-    "lint:write": "eslint --debug src/ --fix"
+    "lint:write": "eslint --debug src/ --fix",
+    "prettier": "prettier --write src/**/*.js"
   },
   "devDependencies": {
     "@babel/core": "^7.16.12",
@@ -53,7 +48,6 @@
     "webpack-dev-server": "^4.7.3"
   },
   "lint-staged": {
-    "*.{ts,tsx}": ["npm run lint:write", "git add"],
-    "*.{ts,tsx,css,md}": "prettier --write"
+    "*.{ts,tsx}": ["npm run lint:write", "git add"]
   }
 }
