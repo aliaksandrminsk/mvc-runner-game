@@ -3,7 +3,7 @@ import { globalEvent } from "@billjs/event-emitter";
 
 export class GameModel {
   protected _scene: GameScene = GameScene.MAIN;
-  protected _score: number = 0;
+  protected _score = 0;
 
   public set scene(value: GameScene) {
     this._scene = value;
