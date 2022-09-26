@@ -96,7 +96,7 @@ export class Hero {
       this.sprite.y += this.dy;
     }
     if (this.sprite.y > GameConstants.GAME_AREA_HEIGHT) {
-      this.sprite.emit(MainSceneEvents.HERO_DIE);
+      globalEvent.fire(MainSceneEvents.HERO_DIE);
     }
   }
 }

@@ -2,6 +2,8 @@ import { Diamond } from "./Diamond";
 import { Texture, Container, Sprite } from "pixi.js";
 import { GameConstants } from "../GameConstants";
 import { Hero } from "./Hero";
+import { MainSceneEvents } from "./MainSceneEvents";
+import { globalEvent } from "@billjs/event-emitter";
 
 const TileSize = 64;
 
@@ -125,7 +127,8 @@ export class Platform {
   move() {
     this.container.x += this.dx;
     if (this.right < 0) {
-      this.container.emit("hidden");
+      globalEvent.fire(MainSceneEvents.PLATFORM_HIDDEN, this.container);
+      //this.container.emit(MainSceneEvents.PLATFORM_HIDDEN);
     }
   }
 }

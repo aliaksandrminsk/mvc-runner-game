@@ -2,6 +2,8 @@ import { Container } from "pixi.js";
 import { Platform } from "./Platform";
 import { GameConstants } from "../GameConstants";
 import { Hero } from "./Hero";
+import { MainSceneEvents } from "./MainSceneEvents";
+import { globalEvent } from "@billjs/event-emitter";
 
 interface IRange {
   min: number;
@@ -74,9 +76,12 @@ export class Platforms {
     this.platforms.push(platform);
     this.current = platform;
 
-    platform.container.once("hidden", () => {
-      this.platforms = this.platforms.filter((item) => item !== platform);
-      platform.container.destroy();
+    globalEvent.on(MainSceneEvents.PLATFORM_HIDDEN, (e) => {
+      if (platform.container === e.data) {
+        this.platforms = this.platforms.filter((item) => item !== platform);
+        platform.container.destroy();
+        console.log(12);
+      }
     });
   }
 

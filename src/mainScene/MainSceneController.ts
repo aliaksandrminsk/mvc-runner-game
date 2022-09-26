@@ -16,6 +16,7 @@ export class MainSceneController {
   boundDieHero = () => this.dieHeroHandler();
   boundCollectDiamond = () => this.collectDiamondHandler();
   boundChangeScore = () => this.changeScoreHandler();
+  boundTickerCallBack = (dt: number) => this.tickerCallBackHandler(dt);
 
   constructor(view: MainSceneView, model: GameModel) {
     this.view = view;
@@ -23,20 +24,22 @@ export class MainSceneController {
 
     globalEvent.on(GameEvents.CHANGE_SCORE, this.boundChangeScore);
     globalEvent.on(MainSceneEvents.DIAMOND_COLLECT, this.boundCollectDiamond);
-    this.view.hero.sprite.on(MainSceneEvents.HERO_DIE, this.boundDieHero);
+    globalEvent.on(MainSceneEvents.HERO_DIE, this.boundDieHero);
     this.view.container.on("pointerdown", this.boundPointerdown);
 
     //** Create ticker.
     this.ticker = Ticker.shared;
-    this.ticker.add((dt) => {
-      this.view.update(dt);
-    });
+    this.ticker.add(this.boundTickerCallBack);
 
     //** Create sound.
     this.sound = Sound.from(Loader.shared.resources.music);
     this.sound.play({
       loop: true,
     });
+  }
+
+  protected tickerCallBackHandler(dt: number) {
+    this.view.update(dt);
   }
 
   protected changeScoreHandler() {
@@ -56,11 +59,11 @@ export class MainSceneController {
   }
 
   destroy() {
-    this.ticker.destroy();
+    this.ticker.remove(this.boundTickerCallBack);
     this.sound.stop();
     globalEvent.off(GameEvents.CHANGE_SCORE, this.boundChangeScore);
     globalEvent.off(MainSceneEvents.DIAMOND_COLLECT, this.boundCollectDiamond);
-    this.view.hero.sprite.off(MainSceneEvents.HERO_DIE, this.boundDieHero);
+    globalEvent.off(MainSceneEvents.HERO_DIE, this.boundDieHero);
     this.view.container.off("pointerdown", this.boundPointerdown);
   }
 }

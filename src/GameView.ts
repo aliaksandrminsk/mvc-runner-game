@@ -17,7 +17,7 @@ export class GameView {
     this.container.addChild(this.scene.container);
   }
 
-  setGameState(scene: GameScene) {
+  setScene(scene: GameScene) {
     if (this.scene) {
       this.container.removeChild(this.scene.container);
       this.scene.destroy();
