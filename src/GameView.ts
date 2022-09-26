@@ -1,46 +1,31 @@
-import { GameModel } from "./GameModel";
-import * as PIXI from "pixi.js";
-import { GameEvents } from "./GameEvents";
-import { FinalScene } from "./views/FinalScene";
-import { MainScene } from "./views/MainScene";
-import { Scene } from "./views/Scene";
+import { GameScene } from "./GameModel";
+import { Container } from "pixi.js";
 
-export class GameView extends PIXI.utils.EventEmitter {
-  private readonly _game: GameModel;
+import { FinalSceneView } from "./finalScene/FinalSceneView";
+import { MainSceneView } from "./mainScene/MainSceneView";
+import { Scene } from "./commonViews/Scene";
 
-  public container: PIXI.Container;
-  public scene: Scene | null = null;
+export class GameView {
+  public container: Container;
+  public scene: Scene;
 
-  constructor(game: GameModel) {
-    super();
-    this._game = game;
-    this.container = new PIXI.Container();
+  constructor() {
+    this.container = new Container();
 
     //** Initialization of game.
-    this.init();
-
-    //** Listener.
-    this.game.on(GameEvents.CHANGE_GAME_SCENE, () => this.setGameState());
+    this.scene = new MainSceneView();
+    this.container.addChild(this.scene.container);
   }
 
-  get game(): GameModel {
-    return this._game;
-  }
-
-  init() {
-    this.setGameState();
-  }
-
-  setGameState() {
+  setGameState(scene: GameScene) {
     if (this.scene) {
       this.container.removeChild(this.scene.container);
       this.scene.destroy();
-      this.scene = null;
     }
-    if (this.game.scene === "main") {
-      this.scene = new MainScene(this.game);
-    } else if (this.game.scene === "final") {
-      this.scene = new FinalScene(this.game);
+    if (scene === GameScene.MAIN) {
+      this.scene = new MainSceneView();
+    } else if (scene === GameScene.FINAL) {
+      this.scene = new FinalSceneView();
     }
     if (this.scene) {
       this.container.addChild(this.scene.container);

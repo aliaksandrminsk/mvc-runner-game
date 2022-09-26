@@ -1,24 +1,24 @@
-import { Background } from "./Background";
+import { Background } from "../commonViews/Background";
 import { Graphics, Text } from "pixi.js";
-import { LabelScore } from "./LabelScore";
-import { GameEvents } from "../GameEvents";
+import { LabelScore } from "../commonViews/LabelScore";
+//import { GameEvents } from "../GameEvents";
 import { GameConstants } from "../GameConstants";
-import { GameModel } from "../GameModel";
-import { Scene } from "./Scene";
+//import { GameModel } from "../GameModel";
+import { Scene } from "../commonViews/Scene";
 
-export class FinalScene extends Scene {
+export class FinalSceneView extends Scene {
   protected popup: Graphics | null = null;
 
-  constructor(game: GameModel) {
+  constructor() {
     super();
     this.createBackground();
     this.createPopup();
-    this.createLabelScore(game.score);
+    //this.createLabelScore(game.score);
     this.createText();
     this.container.interactive = true;
-    this.container.once("pointerdown", () => {
-      window.dispatchEvent(new Event(GameEvents.FINAL_SCENE_CLICKED));
-    });
+    // this.container.once("pointerdown", () => {
+    //   window.dispatchEvent(new Event(GameEvents.FINAL_SCENE_CLICKED));
+    // });
   }
 
   createBackground() {

@@ -3,6 +3,7 @@ import { GameConstants } from "../GameConstants";
 import { Platform } from "./Platform";
 import { GameEvents } from "../GameEvents";
 import { Sound } from "@pixi/sound";
+import { globalEvent } from "@billjs/event-emitter";
 
 export class Hero {
   protected dy: number;
@@ -26,7 +27,8 @@ export class Hero {
   }
 
   collectDiamond() {
-    window.dispatchEvent(new Event(GameEvents.DIAMOND_COLLECT));
+    globalEvent.fire(GameEvents.DIAMOND_COLLECT);
+    //window.dispatchEvent(new Event(GameEvents.DIAMOND_COLLECT));
   }
 
   startJump() {

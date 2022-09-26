@@ -35,7 +35,7 @@ export class App {
   start() {
     // Create game MVC.
     this._gameModel = new GameModel();
-    this._gameView = new GameView(this._gameModel);
+    this._gameView = new GameView();
     this._gameController = new GameController(this._gameModel, this._gameView);
 
     // Size and resize game.
