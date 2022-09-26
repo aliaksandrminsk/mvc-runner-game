@@ -2,8 +2,8 @@ import { DiamondView } from "../mainScene/DiamondView";
 import { Texture, Container, Sprite } from "pixi.js";
 import { GameConstants } from "../GameConstants";
 import { HeroView } from "../mainScene/HeroView";
-import { MainSceneEvents } from "../mainScene/MainSceneEvents";
 import { globalEvent } from "@billjs/event-emitter";
+import { PlatformsEvents } from "./PlatformsEvents";
 
 const TileSize = 64;
 
@@ -127,7 +127,7 @@ export class PlatformView {
   move() {
     this.container.x += this.dx;
     if (this.right < 0) {
-      globalEvent.fire(MainSceneEvents.PLATFORM_HIDDEN, this.container);
+      globalEvent.fire(PlatformsEvents.PLATFORM_HIDDEN, this.container);
     }
   }
 }

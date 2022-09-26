@@ -1,8 +1,6 @@
 import { Container } from "pixi.js";
 import { GameConstants } from "../GameConstants";
 import { HeroView } from "../mainScene/HeroView";
-import { MainSceneEvents } from "../mainScene/MainSceneEvents";
-import { globalEvent } from "@billjs/event-emitter";
 import { PlatformView } from "./PlatformView";
 
 interface IRange {
@@ -75,14 +73,6 @@ export class PlatformsView {
     this.container.addChild(platform.container);
     this.platforms.push(platform);
     this.current = platform;
-
-    globalEvent.on(MainSceneEvents.PLATFORM_HIDDEN, (e) => {
-      if (platform.container === e.data) {
-        this.platforms = this.platforms.filter((item) => item !== platform);
-        platform.container.destroy();
-        console.log(12);
-      }
-    });
   }
 
   checkCollision(hero: HeroView) {

@@ -1,5 +1,5 @@
 import { globalEvent, Event } from "@billjs/event-emitter";
-import { MainSceneEvents } from "../mainScene/MainSceneEvents";
+import { PlatformsEvents } from "./PlatformsEvents";
 import { PlatformsView } from "./PlatformsView";
 
 export class PlatformsController {
@@ -8,7 +8,7 @@ export class PlatformsController {
 
   constructor(view: PlatformsView) {
     this.view = view;
-    globalEvent.on(MainSceneEvents.PLATFORM_HIDDEN, this.boundHidePlatform);
+    globalEvent.on(PlatformsEvents.PLATFORM_HIDDEN, this.boundHidePlatform);
   }
 
   protected hidePlatformHandler(e: Event) {
@@ -23,6 +23,6 @@ export class PlatformsController {
   }
 
   destroy() {
-    globalEvent.off(MainSceneEvents.PLATFORM_HIDDEN, this.boundHidePlatform);
+    globalEvent.off(PlatformsEvents.PLATFORM_HIDDEN, this.boundHidePlatform);
   }
 }
