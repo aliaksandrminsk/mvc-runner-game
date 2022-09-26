@@ -1,14 +1,14 @@
-import { Diamond } from "./Diamond";
+import { DiamondView } from "../mainScene/DiamondView";
 import { Texture, Container, Sprite } from "pixi.js";
 import { GameConstants } from "../GameConstants";
-import { Hero } from "./Hero";
-import { MainSceneEvents } from "./MainSceneEvents";
+import { HeroView } from "../mainScene/HeroView";
+import { MainSceneEvents } from "../mainScene/MainSceneEvents";
 import { globalEvent } from "@billjs/event-emitter";
 
 const TileSize = 64;
 
-export class Platform {
-  private diamonds: Array<Diamond>;
+export class PlatformView {
+  private diamonds: Array<DiamondView>;
   private readonly diamondsOffsetMin: number;
   private readonly diamondsOffsetMax: number;
   private readonly rows: number;
@@ -46,14 +46,14 @@ export class Platform {
 
     for (let i = 0; i < this.cols; i++) {
       if (Math.random() < 0.4) {
-        const diamond = new Diamond(64 * i, -y);
+        const diamond = new DiamondView(64 * i, -y);
         if (diamond.sprite) this.container.addChild(diamond.sprite);
         this.diamonds.push(diamond);
       }
     }
   }
 
-  checkCollision(hero: Hero) {
+  checkCollision(hero: HeroView) {
     this.diamonds.forEach((diamond) => diamond.checkCollision(hero));
 
     if (this.isCollideTop(hero)) {
@@ -69,7 +69,7 @@ export class Platform {
     }
   }
 
-  isCollideTop(hero: Hero) {
+  isCollideTop(hero: HeroView) {
     return (
       hero.right >= this.left &&
       hero.left <= this.right &&
@@ -78,7 +78,7 @@ export class Platform {
     );
   }
 
-  isCollideLeft(hero: Hero) {
+  isCollideLeft(hero: HeroView) {
     return (
       hero.bottom >= this.top &&
       hero.top <= this.bottom &&
@@ -128,7 +128,6 @@ export class Platform {
     this.container.x += this.dx;
     if (this.right < 0) {
       globalEvent.fire(MainSceneEvents.PLATFORM_HIDDEN, this.container);
-      //this.container.emit(MainSceneEvents.PLATFORM_HIDDEN);
     }
   }
 }

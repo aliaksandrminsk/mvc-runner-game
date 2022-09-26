@@ -1,7 +1,7 @@
 import * as PIXI from "pixi.js";
-import { Hero } from "./Hero";
+import { HeroView } from "./HeroView";
 
-export class Diamond {
+export class DiamondView {
   public sprite: PIXI.Sprite | null;
 
   constructor(x: number, y: number) {
@@ -10,7 +10,7 @@ export class Diamond {
     this.sprite.y = y;
   }
 
-  checkCollision(hero: Hero) {
+  checkCollision(hero: HeroView) {
     if (!this.sprite) {
       return;
     }
@@ -22,7 +22,7 @@ export class Diamond {
     }
   }
 
-  isOverlap(hero: Hero) {
+  isOverlap(hero: HeroView) {
     if (this.top === null) return false;
     if (this.bottom === null) return false;
     if (this.left === null) return false;

@@ -3,11 +3,11 @@ import { Container } from "pixi.js";
 
 import { FinalSceneView } from "./finalScene/FinalSceneView";
 import { MainSceneView } from "./mainScene/MainSceneView";
-import { Scene } from "./common/Scene";
+import { SceneView } from "./common/SceneView";
 
 export class GameView {
   public container: Container;
-  public scene: Scene;
+  public scene: SceneView;
 
   constructor() {
     this.container = new Container();

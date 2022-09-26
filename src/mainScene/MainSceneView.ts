@@ -1,32 +1,32 @@
-import { Background } from "../common/Background";
-import { Platforms } from "./Platforms";
-import { Hero } from "./Hero";
-import { LabelScore } from "../common/LabelScore";
-import { Scene } from "../common/Scene";
+import { BackgroundView } from "../common/BackgroundView";
+import { PlatformsView } from "../platforms/PlatformsView";
+import { HeroView } from "./HeroView";
+import { LabelScoreView } from "../common/LabelScoreView";
+import { SceneView } from "../common/SceneView";
 
-export class MainSceneView extends Scene {
-  public hero: Hero;
-  protected bg: Background;
-  protected platforms: Platforms;
-  protected labelScore: LabelScore;
+export class MainSceneView extends SceneView {
+  public hero: HeroView;
+  public platforms: PlatformsView;
+  protected bg: BackgroundView;
+  protected labelScore: LabelScoreView;
 
   constructor() {
     super();
 
     //** Create background.
-    this.bg = new Background();
+    this.bg = new BackgroundView();
     this.container.addChild(this.bg.container);
 
     //** Create platforms.
-    this.platforms = new Platforms();
+    this.platforms = new PlatformsView();
     this.container.addChild(this.platforms.container);
 
     //** Create labelScore.
-    this.labelScore = new LabelScore();
+    this.labelScore = new LabelScoreView();
     this.container.addChild(this.labelScore);
 
     //** Create hero.
-    this.hero = new Hero();
+    this.hero = new HeroView();
     this.container.addChild(this.hero.sprite);
     this.container.interactive = true;
   }

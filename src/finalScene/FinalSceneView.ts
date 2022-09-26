@@ -1,10 +1,10 @@
-import { Background } from "../common/Background";
+import { BackgroundView } from "../common/BackgroundView";
 import { Graphics, Text } from "pixi.js";
-import { LabelScore } from "../common/LabelScore";
+import { LabelScoreView } from "../common/LabelScoreView";
 import { GameConstants } from "../GameConstants";
-import { Scene } from "../common/Scene";
+import { SceneView } from "../common/SceneView";
 
-export class FinalSceneView extends Scene {
+export class FinalSceneView extends SceneView {
   protected popup: Graphics | null = null;
 
   constructor() {
@@ -16,7 +16,7 @@ export class FinalSceneView extends Scene {
   }
 
   createBackground() {
-    const bg = new Background();
+    const bg = new BackgroundView();
     this.container.addChild(bg.container);
   }
 
@@ -32,7 +32,7 @@ export class FinalSceneView extends Scene {
   }
 
   createLabelScore(amount: number) {
-    const labelScore = new LabelScore(
+    const labelScore = new LabelScoreView(
       GameConstants.GAME_AREA_WIDTH / 2,
       GameConstants.GAME_AREA_HEIGHT / 2 - 100,
       0.5

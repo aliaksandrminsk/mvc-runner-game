@@ -1,6 +1,6 @@
 import { Container, Sprite, Texture } from "pixi.js";
 
-export class Background {
+export class BackgroundView {
   public container: Container;
   protected readonly speed: number;
   protected sprites: Array<Sprite> = [];

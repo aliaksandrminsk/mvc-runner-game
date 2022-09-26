@@ -5,12 +5,15 @@ import { GameEvents } from "../GameEvents";
 import { MainSceneEvents } from "./MainSceneEvents";
 import { Loader, Ticker } from "pixi.js";
 import { Sound } from "@pixi/sound";
+import { PlatformsController } from "../platforms/PlatformsController";
 
 export class MainSceneController {
   protected view: MainSceneView;
   protected model: GameModel;
   protected ticker: Ticker;
   protected sound: Sound;
+
+  protected platformsController: PlatformsController;
 
   boundPointerdown = () => this.pointerdownHandler();
   boundDieHero = () => this.dieHeroHandler();
@@ -21,6 +24,8 @@ export class MainSceneController {
   constructor(view: MainSceneView, model: GameModel) {
     this.view = view;
     this.model = model;
+
+    this.platformsController = new PlatformsController(this.view.platforms);
 
     globalEvent.on(GameEvents.CHANGE_SCORE, this.boundChangeScore);
     globalEvent.on(MainSceneEvents.DIAMOND_COLLECT, this.boundCollectDiamond);
@@ -65,5 +70,6 @@ export class MainSceneController {
     globalEvent.off(MainSceneEvents.DIAMOND_COLLECT, this.boundCollectDiamond);
     globalEvent.off(MainSceneEvents.HERO_DIE, this.boundDieHero);
     this.view.container.off("pointerdown", this.boundPointerdown);
+    this.platformsController.destroy();
   }
 }

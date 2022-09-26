@@ -1,15 +1,15 @@
 import { Loader, AnimatedSprite, Texture } from "pixi.js";
 import { GameConstants } from "../GameConstants";
-import { Platform } from "./Platform";
+import { PlatformView } from "../platforms/PlatformView";
 import { Sound } from "@pixi/sound";
 import { globalEvent } from "@billjs/event-emitter";
 import { MainSceneEvents } from "./MainSceneEvents";
 
-export class Hero {
+export class HeroView {
   protected dy: number;
   protected jumpIndex: number;
   protected jumpSound: Sound;
-  public platform: Platform | null;
+  public platform: PlatformView | null;
   public sprite: AnimatedSprite;
 
   constructor() {
@@ -60,7 +60,7 @@ export class Hero {
     return this.bottom + this.dy;
   }
 
-  stayOnPlatform(platform: Platform) {
+  stayOnPlatform(platform: PlatformView) {
     if (!this.platform) {
       this.setAppearance(false);
     }
@@ -71,7 +71,7 @@ export class Hero {
     this.sprite.y = platform.top - this.sprite.height;
   }
 
-  moveByPlatform(platform: Platform) {
+  moveByPlatform(platform: PlatformView) {
     this.sprite.x = platform.nextleft - this.sprite.width;
   }
 

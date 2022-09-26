@@ -1,6 +1,6 @@
 import { Container } from "pixi.js";
 
-export class Scene {
+export class SceneView {
   public container: Container;
 
   protected constructor() {

@@ -1,6 +1,6 @@
 import { Text } from "pixi.js";
 
-export class LabelScore extends Text {
+export class LabelScoreView extends Text {
   constructor(x = 10, y = 10, anchor = 0) {
     super();
     this.x = x;

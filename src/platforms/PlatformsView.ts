@@ -1,9 +1,9 @@
 import { Container } from "pixi.js";
-import { Platform } from "./Platform";
 import { GameConstants } from "../GameConstants";
-import { Hero } from "./Hero";
-import { MainSceneEvents } from "./MainSceneEvents";
+import { HeroView } from "../mainScene/HeroView";
+import { MainSceneEvents } from "../mainScene/MainSceneEvents";
 import { globalEvent } from "@billjs/event-emitter";
+import { PlatformView } from "./PlatformView";
 
 interface IRange {
   min: number;
@@ -16,11 +16,11 @@ interface IPlatformParameters {
   x: number;
 }
 
-export class Platforms {
+export class PlatformsView {
   public container: Container;
-  private platforms: Array<Platform>;
+  public platforms: Array<PlatformView>;
   private ranges: { rows: IRange; cols: IRange; offset: IRange };
-  private current: Platform | null = null;
+  private current: PlatformView | null = null;
 
   constructor() {
     this.platforms = [];
@@ -71,7 +71,7 @@ export class Platforms {
   }
 
   createPlatform(data: IPlatformParameters) {
-    const platform = new Platform(data.rows, data.cols, data.x);
+    const platform = new PlatformView(data.rows, data.cols, data.x);
     this.container.addChild(platform.container);
     this.platforms.push(platform);
     this.current = platform;
@@ -85,7 +85,7 @@ export class Platforms {
     });
   }
 
-  checkCollision(hero: Hero) {
+  checkCollision(hero: HeroView) {
     this.platforms.forEach((platform) => {
       platform.checkCollision(hero);
     });
