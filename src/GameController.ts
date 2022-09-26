@@ -18,8 +18,6 @@ export class GameController {
     this.gameModel = game;
     this.gameView = gameView;
 
-    fgfg gfdgfdg
-
     //** Add listeners to the GameController.
     globalEvent.on(GameEvents.CHANGE_GAME_SCENE, () => this.setGameState());
 
