@@ -13,8 +13,8 @@
     "build": "cross-env NODE_ENV=production webpack --mode production",
     "dev": "cross-env NODE_ENV=development webpack --mode development",
     "lint": "eslint src/",
-    "prepare": "husky install",
-    "test": "echo \"test\""
+    "test": "echo \"test\"",
+    "prepare": "husky install"
   },
   "devDependencies": {
     "@babel/core": "^7.16.12",
@@ -47,13 +47,8 @@
     "webpack-cli": "^4.9.1",
     "webpack-dev-server": "^4.7.3"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
-  "lint-staged":{
-    "**/*.{js,ts}":[
+  "lint-staged": {
+    "**/*.{js,ts}": [
       "npm run test",
       "npx prettier --write \"src/**\"",
       "npx eslint \"src/**\"",
