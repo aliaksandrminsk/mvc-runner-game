@@ -14,7 +14,9 @@
     "dev": "cross-env NODE_ENV=development webpack --mode development",
     "lint": "eslint --debug src/",
     "lint:write": "eslint --debug src/ --fix",
-    "prettier": "prettier --write src/**/*.js"
+    "prettier": "prettier --write src/**/*.js",
+    "prepare": "husky install",
+    "test" : "echo \"test\""
   },
   "devDependencies": {
     "@babel/core": "^7.16.12",
@@ -36,8 +38,8 @@
     "eslint-webpack-plugin": "^3.1.1",
     "file-loader": "^6.2.0",
     "html-webpack-plugin": "^5.5.0",
-    "husky": "^7.0.4",
-    "lint-staged": "^12.3.1",
+    "husky": "^8.0.0",
+    "lint-staged": "^12.5.0",
     "postcss-loader": "^6.2.1",
     "postcss-preset-env": "^7.2.3",
     "prettier": "^2.6.2",
@@ -48,6 +50,9 @@
     "webpack-dev-server": "^4.7.3"
   },
   "lint-staged": {
-    "*.{ts,tsx}": ["npm run lint:write", "git add"]
+    "**/*.{js,ts,tsx}": [
+      "npx prettier --write",
+      "npx eslint --fix"
+    ]
   }
 }
