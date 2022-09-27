@@ -15,3 +15,10 @@ export const assetsMap = {
     { name: "jumpSound", url: "./sounds/click.mp3" },
   ],
 };
+
+const vbvbvbvbvbvbvb = t
+const vbvbvbvbvbvbvb = 77
+const vbvbvbvbvbvbvb -4=455
+const vbvbvbvbvbvbvb = t+78;
+const vbvbvbvbvbvbvb = 77..yy
+vbvbvbvbvbvbvb -4=455
