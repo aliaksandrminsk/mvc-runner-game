@@ -12,9 +12,8 @@
     "start": "cross-env NODE_ENV=development webpack-dev-server --mode development --open",
     "build": "cross-env NODE_ENV=production webpack --mode production",
     "dev": "cross-env NODE_ENV=development webpack --mode development",
-    "lint": "eslint --debug src/",
-    "lint:write": "eslint --debug src/ --fix",
-    "prettier": "prettier --write src/**/*.js",
+    "lint": "eslint src/",
+    "prettier": "prettier --write src/**/*.ts",
     "prepare": "husky install",
     "test" : "echo \"test\""
   },
@@ -51,8 +50,9 @@
   },
   "lint-staged": {
     "**/*.{js,ts,tsx}": [
-      "npx prettier --write",
-      "npx eslint --fix"
+      "npm run prettier",
+      "npm run lint",
+      "git add"
     ]
   }
 }
