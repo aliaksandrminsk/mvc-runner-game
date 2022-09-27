@@ -34,9 +34,6 @@ export class App {
     const gameView = new GameView();
     new GameController(gameModel, gameView);
 
-    const vbvbvbvbvbvbvb = t;
-    vbvbvbvbvbvbvb = 77;
-
     // Size and resize game.
     window.addEventListener("resize", () => this.resize());
     this.resize();
