@@ -15,7 +15,7 @@
     "lint": "eslint src/",
     "prettier": "prettier --write src/**/*.ts",
     "prepare": "husky install",
-    "test" : "echo \"test\""
+    "test": "echo \"test\""
   },
   "devDependencies": {
     "@babel/core": "^7.16.12",
@@ -38,7 +38,7 @@
     "file-loader": "^6.2.0",
     "html-webpack-plugin": "^5.5.0",
     "husky": "^8.0.0",
-    "lint-staged": "^12.5.0",
+    "lint-staged": "^13.0.3",
     "postcss-loader": "^6.2.1",
     "postcss-preset-env": "^7.2.3",
     "prettier": "^2.6.2",
