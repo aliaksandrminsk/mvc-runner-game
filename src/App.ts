@@ -38,12 +38,6 @@ export class App {
     vbvbvbvbvbvbvb = 77;
     vbvbvbvbvbvbvb -4=455;
 
-    const vbvbvbvbvbvbvb = t;
-    vbvbvbvbvbvbvb = 77;
-    vbvbvbvbvbvbvb -4=455;
-
-
-
     // Size and resize game.
     window.addEventListener("resize", () => this.resize());
     this.resize();
