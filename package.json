@@ -13,7 +13,6 @@
     "build": "cross-env NODE_ENV=production webpack --mode production",
     "dev": "cross-env NODE_ENV=development webpack --mode development",
     "lint": "eslint src/",
-    "prettier": "prettier --write src/**/*.ts",
     "prepare": "husky install",
     "test": "echo \"test\""
   },
@@ -48,10 +47,10 @@
     "webpack-cli": "^4.9.1",
     "webpack-dev-server": "^4.7.3"
   },
-  "lint-staged": {
-    "**/*.{js,ts,tsx}": [
-      "npm run lint",
-      "git add"
+  "lint-staged":{
+    "**/*.{js,ts}":[
+      "npx prettier --write",
+      "npx eslint --fix"
     ]
   }
 }
