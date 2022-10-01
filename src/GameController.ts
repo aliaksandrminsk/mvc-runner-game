@@ -6,6 +6,8 @@ import { MainSceneController } from "./mainScene/MainSceneController";
 import { MainSceneView } from "./mainScene/MainSceneView";
 import { FinalSceneView } from "./finalScene/FinalSceneView";
 import { globalEvent } from "@billjs/event-emitter";
+import { GameConstants } from "./GameConstants";
+import { AbstractRenderer } from "pixi.js";
 
 export class GameController {
   private readonly gameModel: GameModel;
@@ -52,5 +54,29 @@ export class GameController {
         this.gameModel
       );
     }
+  }
+
+  // Resize game.
+  resize(renderer: AbstractRenderer) {
+    let h = GameConstants.GAME_AREA_HEIGHT;
+    let w = GameConstants.GAME_AREA_WIDTH;
+
+    let heightRatio = 1,
+      widthRation = 1;
+    if (w > document.body.clientWidth) {
+      widthRation = w / document.body.clientWidth;
+    }
+    if (h > document.body.clientHeight) {
+      heightRatio = h / document.body.clientHeight;
+    }
+    if (widthRation > heightRatio) {
+      h = h / widthRation;
+      w = w / widthRation;
+    } else {
+      h = h / heightRatio;
+      w = w / heightRatio;
+    }
+    renderer.view.style.width = w + "px";
+    renderer.view.style.height = h + "px";
   }
 }
