@@ -6,7 +6,7 @@
     "@billjs/event-emitter": "^1.0.3",
     "@pixi/sound": "^4.3.0",
     "@tweenjs/tween.js": "^18.6.4",
-    "typescript": "^4.6.3"
+    "pixi.js": "^6.5.5"
   },
   "scripts": {
     "start": "cross-env NODE_ENV=development webpack-dev-server --mode development --open",
@@ -21,33 +21,27 @@
     "@babel/polyfill": "^7.12.1",
     "@babel/preset-env": "^7.16.11",
     "@babel/preset-typescript": "^7.16.7",
-    "@types/pixi.js": "^5.0.0",
     "@typescript-eslint/eslint-plugin": "^5.10.1",
     "@typescript-eslint/parser": "^5.10.1",
-    "autoprefixer": "^10.4.2",
     "babel-loader": "^8.2.3",
     "clean-webpack-plugin": "^4.0.0",
     "copy-webpack-plugin": "^10.2.1",
     "cross-env": "^7.0.3",
-    "css-loader": "^6.5.1",
-    "css-minimizer-webpack-plugin": "^3.4.1",
     "eslint": "^8.7.0",
     "eslint-webpack-plugin": "^3.1.1",
     "file-loader": "^6.2.0",
     "html-webpack-plugin": "^5.5.0",
     "husky": "^8.0.0",
     "lint-staged": "^13.0.3",
-    "postcss-loader": "^6.2.1",
-    "postcss-preset-env": "^7.2.3",
     "prettier": "^2.6.2",
-    "style-loader": "^3.3.1",
     "terser-webpack-plugin": "^5.3.0",
     "webpack": "^5.67.0",
     "webpack-cli": "^4.9.1",
-    "webpack-dev-server": "^4.7.3"
+    "webpack-dev-server": "^4.7.3",
+    "typescript": "4.8.4"
   },
   "lint-staged": {
-    "**/*.{js,ts}": [
+    "**/*.{ts}": [
       "npm run lint"
     ]
   }
